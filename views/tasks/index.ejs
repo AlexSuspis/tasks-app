@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+
+<body>
+    <h1>Index.ejs view!</h1>
+    
+    <section>
+        <ul id="container">
+            <% for(let task of tasks){ %>
+                <li>
+                    <%= task.text%> <b><%= task.id %></b>
+                </li>
+            <%} %>
+        </ul>
+    </section>
+</body>
+</html>
