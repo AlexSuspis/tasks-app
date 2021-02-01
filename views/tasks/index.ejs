@@ -15,6 +15,11 @@
             <% for(let task of tasks){ %>
                 <li>
                     <%= task.text%> <b><%= task.id %></b>
+                    <ul>
+                    <%for(subtask of task.subtasks){%>
+                        <li><%=subtask.text%></li>
+                    <%}%>
+                    </ul>
                 </li>
             <%} %>
         </ul>

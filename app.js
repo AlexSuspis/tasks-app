@@ -13,8 +13,29 @@ app.use(bodyParser.urlencoded({extended : true}))
 const tasks = [
     {
         id: 1,
-        text: 'test test',
-        subtasks: [],
+        text: 'Feed cat',
+        subtasks: [
+            {
+                text: 'wash bowl'
+            },
+            {
+                text: 'buy food'
+            }
+        ],
+        labels: [],
+        colour: 'red'
+    },
+    {
+        id: 2,
+        text: 'Water plants',
+        subtasks: [
+            {
+                text: 'water!!!'
+            },
+            {
+                text: 'buy food'
+            }
+        ],
         labels: [],
         colour: 'red'
     }
@@ -47,6 +68,15 @@ app.patch('/tasks/:id', (req, res) => {
 // DELETE a task
 app.delete('/tasks/:id', (req, res) => {
     //we take in an id and remove the respective task from the array
+    let {id} = req.params;
+
+    //find index of task with unique id
+    let index = tasks.findIndex(t => t.id === parseInt(id));
+
+    tasks.splice(index,1)
+    console.log(tasks)
+    res.send('task deleted!')
+    
 })
 
 
