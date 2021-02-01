@@ -25,17 +25,16 @@ app.get('/tasks', (req, res) => {
     res.render('tasks/index', { tasks })
 })
 
-// PATCH text
-// PATCH array of substasks
-// PATCH array of labels
-// PATCH colour
+//PATCH endpoint for changing the following task properties: subtasks array, colour, labels array, inner text
 app.patch('/tasks/:id', (req, res) => {
     let { id } = req.params;
-
     let [newProperty, newValue] = Object.entries(req.body)[0];
 
+    //find task with unique id
     let task = tasks.find(t => t.id === parseInt(id));
 
+    //find task's property that's equal to key of req.body object, if any exists.
+    //if found, replace its value with value from req.body object.
     for(let property in task){
         if(newProperty == property){
             task[property] = newValue;
