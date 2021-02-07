@@ -1,7 +1,15 @@
-
-<ul>
-    <%for(subtask of task.subtasks){%>
-        <li><%=subtask.text%></li>
+<div>
+    <li>
+        <button>test task</button>
+        <input type="text" value="<%= task.text %> <%= task.id %>">
         <span><img src="/pen.svg" alt="" height="15px" width="15px"></span>
-    <%}%>
-</ul>
+        <ul>
+            <%for(subtask of task.subtasks){%>
+                <li>
+                    <button>test subtask</button>
+                    <input type="text" value="<%=subtask.text%>">
+                </li>
+            <%}%>
+        </ul>
+    </li>
+</div>
