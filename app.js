@@ -6,7 +6,10 @@ const bodyParser = require('body-parser')
 const port = 3000;
 
 app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'views'));
+
 app.use(express.static('public'))
+app.use(express.static('images'))
 app.use(express.urlencoded())
 app.use(bodyParser.urlencoded({extended : true}))
 

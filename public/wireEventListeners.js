@@ -1,5 +1,13 @@
     //UI Events
 //Expand task options (Click on options icon)
+const optionIcons = document.querySelectorAll('span');
+for(let icon of optionIcons){
+    icon.addEventListener('click', function(){
+        alert("ahhh!")
+    })
+}
+
+
 //
 
 
@@ -18,6 +26,7 @@
 // Label is added to task (4)
 
 // Subtask has been created (5)
+    //Trigger: Subtask icon in OverlayMenu is clicked.
 
 // Subtask has been completed (6)
 

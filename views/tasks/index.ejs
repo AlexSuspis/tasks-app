@@ -13,18 +13,12 @@
     <section>
         <ul id="container">
             <% for(let task of tasks){ %>
-            <div>
-                <li>
-                <%= task.text%> <b><%= task.id %></b>
-                    <ul>
-                        <%for(subtask of task.subtasks){%>
-                            <li><%=subtask.text%></li>
-                        <%}%>
-                    </ul>
-                </li>
-            </div>
-            <%} %>
+                <%- include ("partials/taskComponent.ejs", {task}) %>
+            <% } %>
         </ul>
     </section>
+
+
+    <script src="/setEventListeners.js"></script>
 </body>
 </html>
