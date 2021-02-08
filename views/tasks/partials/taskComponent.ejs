@@ -3,6 +3,7 @@
         <button id="taskButton">test task</button>
         <input type="text" id="taskTextInput" value="<%= task.text %> <%= task.id %>">
         <span><img src="/pen.svg" alt="" id="optionsIcon" height="15px" width="15px"></span>
+        <%- include ("taskOptionsOverlay.ejs") %>
         <ul>
             <%for(subtask of task.subtasks){%>
                 <div id="subtask">
