@@ -30,8 +30,7 @@ for(let icon of optionIcons){
     //Trigger: Colour pallette pops up when colour icon is clicked in 
     //expanded OverlayMenu. When a colour is successfully saved, PATCH request sent.
 
-// Task’s subtask has been completed (3)
-
+// Task’s subtask has been completed (3) (same as below??)
 // Subtask has been completed (4)
 
     const subtaskButtons = document.querySelectorAll('#task #subtaskButton');
