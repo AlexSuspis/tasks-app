@@ -3,7 +3,7 @@
 
     //UI Events
 //Expand task options (Click on options icon)
-const optionIcons = document.querySelectorAll('span');
+const optionIcons = document.querySelectorAll('#optionsIcon');
 for(let icon of optionIcons){
     icon.addEventListener('click', function(){
         alert("ahhh!")
@@ -16,7 +16,7 @@ for(let icon of optionIcons){
     // AXIOS PATCH REQUESTS
 
 // Task’s text is modified (1)
-    //Trigger: A change in input element is detected. Then validated. Only then 
+    //Trigger: A change in input element is detected. Only then 
     //is the AXIOS request sent.
 
     const textInputs = document.querySelectorAll('#task input')
@@ -41,7 +41,7 @@ for(let icon of optionIcons){
     } 
 
 // Label is added to task (5)
-
+    const labelIcons = document.querySelectorAll('');
 // Subtask has been created (6)
     //Trigger: Subtask icon in OverlayMenu is clicked.
 
