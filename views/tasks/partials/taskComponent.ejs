@@ -1,12 +1,14 @@
 <div id="task">
     <button id="taskButton">task</button>
     <input type="text" id="taskTextInput" value="<%= task.text %> <%= task.id %>">
-    <span><img src="/pen.svg" alt="" id="optionsIcon"></span>
-    <%- include ("taskOptionsOverlay.ejs") %>
-        <%for(subtask of task.subtasks){%>
-            <div id="subtask">
-                <button id="subtaskButton">subtask</button>
-                <input type="subtaskTextInput" value="<%=subtask.text%>">
-            </div>
-            <%}%>
+    <span>
+        <img src="/pen.svg" alt="" id="optionsIcon">
+        <%- include ("taskOptionsOverlay.ejs") %>
+    </span>
+    <%for(subtask of task.subtasks){%>
+        <div id="subtask">
+            <button id="subtaskButton">subtask</button>
+            <input type="subtaskTextInput" value="<%=subtask.text%>">
+        </div>
+        <%}%>
 </div>

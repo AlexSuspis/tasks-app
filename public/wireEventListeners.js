@@ -1,12 +1,21 @@
 //UI Events
 //Expand task options (Click on options icon)
-const optionIcons = document.querySelectorAll('#optionsIcon');
+const optionIcons = document.querySelectorAll("#optionsIcon");
 for (let icon of optionIcons) {
-    icon.addEventListener('click', function () {
-        alert("Expand options overlay event");
+    icon.addEventListener('click', function (e) {
+        const respectiveOverlayMenu = e.target.nextElementSibling;
+        console.log(respectiveOverlayMenu);
+        toggleElementVisibility(respectiveOverlayMenu);
     })
 }
-
+const toggleElementVisibility = (el) => {
+    console.log(el)
+    if (el.style.display === 'none') {
+        el.style.display = 'inline';
+    } else {
+        el.style.display = 'none';
+    }
+}
 
 
 //EVENT: Task’s text is modified
@@ -46,7 +55,7 @@ for (let button of subtaskButtons) {
 }
 
 //EVENT: Label is added to task
-const labelIcons = document.querySelectorAll('');
+// const labelIcons = document.querySelectorAll('');
 
 
 //EVENT: Subtask has been created
