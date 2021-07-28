@@ -2,17 +2,17 @@
     <li>
         <button id="taskButton">test task</button>
         <input type="text" id="taskTextInput" value="<%= task.text %> <%= task.id %>">
-        <span><img src="/pen.svg" alt="" id="optionsIcon" height="15px" width="15px"></span>
+        <span><img src="/pen.svg" alt="" id="optionsIcon"></span>
         <%- include ("taskOptionsOverlay.ejs") %>
-        <ul>
-            <%for(subtask of task.subtasks){%>
-                <div id="subtask">
-                    <li>
-                        <button id="subtaskButton">test subtask</button>
-                        <input type="subtaskTextInput" value="<%=subtask.text%>">
-                    </li>
-                </div>
-            <%}%>
-        </ul>
+            <ul>
+                <%for(subtask of task.subtasks){%>
+                    <div id="subtask">
+                        <li>
+                            <button id="subtaskButton">test subtask</button>
+                            <input type="subtaskTextInput" value="<%=subtask.text%>">
+                        </li>
+                    </div>
+                    <%}%>
+            </ul>
     </li>
 </div>

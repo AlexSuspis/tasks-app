@@ -6,20 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
     <link rel="stylesheet" href="/taskOptionsOverlay.css">
+    <link rel="stylesheet" href="/taskComponent.css">
 </head>
 
 <body>
     <h1>Index.ejs view!</h1>
-    
+
     <section>
         <ul id="container">
             <% for(let task of tasks){ %>
                 <%- include ("partials/taskComponent.ejs", {task}) %>
-            <% } %>
+                    <% } %>
         </ul>
     </section>
 
 
     <script src="/wireEventListeners.js"></script>
 </body>
+
 </html>
