@@ -1,9 +1,9 @@
-#optionsOverlay img {
+#taskOptionsOverlay img {
     width: 17px;
     width: 17px;
 }
 
-#optionsOverlay {
+#taskOptionsOverlay {
     background-color: #f7f6e7;
     width: fit-content;
     height: fit-content;
