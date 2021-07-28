@@ -15,7 +15,6 @@
         <ul id="container">
             <% for(let task of tasks){ %>
                 <%- include ("partials/taskComponent.ejs", {task}) %>
-                <%- include ("partials/taskOptionsOverlay.ejs", {task}) %>
             <% } %>
         </ul>
     </section>

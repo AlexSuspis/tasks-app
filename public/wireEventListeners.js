@@ -1,67 +1,67 @@
-//All event listeners for each task component.
-
-
-    //UI Events
+//UI Events
 //Expand task options (Click on options icon)
 const optionIcons = document.querySelectorAll('#optionsIcon');
-for(let icon of optionIcons){
-    icon.addEventListener('click', function(){
-        alert("ahhh!")
+for (let icon of optionIcons) {
+    icon.addEventListener('click', function () {
+        alert("Expand options overlay event");
     })
 }
 
 
 
+//EVENT: Task’s text is modified
+//Trigger: A change in input element is detected. Only then 
+//is the AXIOS request sent.
 
-    // AXIOS PATCH REQUESTS
+const textInputs = document.querySelectorAll('#task input')
+for (let textInput of textInputs) {
+    textInput.addEventListener('input', function () {
+        alert("input event!");
+    });
+}
 
-// Task’s text is modified (1)
-    //Trigger: A change in input element is detected. Only then 
-    //is the AXIOS request sent.
+//EVENT: Task’s colour is changed
+//Trigger: Colour pallette pops up when colour icon is clicked in 
+//expanded OverlayMenu. When a colour is successfully saved, PATCH request sent.
 
-    const textInputs = document.querySelectorAll('#task input')
-    for(let textInput of textInputs){
-        textInput.addEventListener('input', function(){
-            alert("input event!");
-        });
-    }
 
-// Task’s colour is changed (2)
-    //Trigger: Colour pallette pops up when colour icon is clicked in 
-    //expanded OverlayMenu. When a colour is successfully saved, PATCH request sent.
+//EVENT: Task has been completed
+//Trigger: Circular button in task's object has been clicked
 
-// Task’s subtask has been completed (3) (same as below??)
-// Subtask has been completed (4)
+const taskButtons = document.querySelectorAll('#task #taskButton');
+for (let button of taskButtons) {
+    button.addEventListener('click', function () {
+        alert('task completed event!')
+    })
+}
 
-    const subtaskButtons = document.querySelectorAll('#task #subtaskButton');
-        for(let button of subtaskButtons) {
-        button.addEventListener('click', function(){
-            alert('subtask completed event!')
-        })
-    } 
 
-// Label is added to task (5)
-    const labelIcons = document.querySelectorAll('');
-// Subtask has been created (6)
-    //Trigger: Subtask icon in OverlayMenu is clicked.
+//EVENT: Subtask has been completed
 
-// Task’s order is changed (7)
+const subtaskButtons = document.querySelectorAll('#task #subtaskButton');
+for (let button of subtaskButtons) {
+    button.addEventListener('click', function () {
+        alert('subtask completed event!')
+    })
+}
+
+//EVENT: Label is added to task
+const labelIcons = document.querySelectorAll('');
+
+
+//EVENT: Subtask has been created
+//Trigger: Subtask icon in OverlayMenu is clicked.
+
+
+binIcon
+taskIcon
+colourPaletteIcon
+labelIcon
+
+
+//EVENT: Task’s order is changed
 // click and drag
 
-
-    //AXIOS DELETE REQUESTS
-
-// Task has been deleted (8)
-    //Trigger: Trash icon in task's overlay menu is clicked
-
-// Task has been completed (9)
-    //Trigger: Circular button in task's object has been clicked
-
-    const taskButtons = document.querySelectorAll('#task #taskButton');
-        for(let button of taskButtons) {
-        button.addEventListener('click', function(){
-            alert('task completed event!')
-        })
-    } 
-
+//EVENT: Task has been deleted
+//Trigger: Trash icon in task's overlay menu is clicked
 
