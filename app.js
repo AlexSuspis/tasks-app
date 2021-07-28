@@ -4,6 +4,7 @@ const path = require('path');
 const { v4: uuid } = require('uuid');
 const bodyParser = require('body-parser');
 const { tasks } = require('./mock_data/tasks');
+const { kMaxLength } = require('buffer');
 
 
 app.set('view engine', 'ejs');
@@ -38,6 +39,25 @@ app.patch('/tasks/:id', (req, res) => {
     console.dir(tasks[0])
     res.send('patch req received!');
 })
+app.patch('/tasks/:id/text', (req, res) => {
+    let { id } = req.params;
+    const { newText } = req.body;
+    //find task with unique id
+    let task = tasks.find(t => t.id === parseInt(id));
+    if (task.text !== newText) {
+        task.text = newText;
+    }
+    console.log(task);
+
+})
+app.patch('/tasks/:id/colour', (req, res) => {
+
+})
+app.patch('/tasks/:id/label', (req, res) => {
+
+})
+
+
 
 // DELETE a task
 app.delete('/tasks/:id', (req, res) => {

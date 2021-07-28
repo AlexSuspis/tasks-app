@@ -1,4 +1,4 @@
-//UI Events
+//EVENT: Task options icon is clicked
 //Expand task options (Click on options icon)
 const optionIcons = document.querySelectorAll("#optionsIcon");
 for (let icon of optionIcons) {
@@ -22,8 +22,8 @@ const toggleElementVisibility = (el) => {
 
 const textInputs = document.querySelectorAll('#task input')
 for (let textInput of textInputs) {
-    textInput.addEventListener('input', function () {
-        alert("input event!");
+    textInput.addEventListener('change', function () {
+        alert("text has been changed!");
     });
 }
 
