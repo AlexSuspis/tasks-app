@@ -4,16 +4,14 @@ const optionIcons = document.querySelectorAll("#optionsIcon");
 for (let icon of optionIcons) {
     icon.addEventListener('click', function (e) {
         const respectiveOverlayMenu = e.target.nextElementSibling;
-        console.log(respectiveOverlayMenu);
         toggleElementVisibility(respectiveOverlayMenu);
     })
 }
 const toggleElementVisibility = (el) => {
-    console.log(el)
-    if (el.style.display === 'none') {
-        el.style.display = 'inline';
-    } else {
+    if (el.style.display === 'inline') {
         el.style.display = 'none';
+    } else {
+        el.style.display = 'inline';
     }
 }
 

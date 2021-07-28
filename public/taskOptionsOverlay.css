@@ -1,12 +1,12 @@
-#taskOptionsOverlay img {
-    width: 17px;
-    width: 17px;
-}
-
 #taskOptionsOverlay {
     background-color: #f7f6e7;
     width: fit-content;
     height: fit-content;
     padding: 2px 2px;
-    display:inline;
+    display:none;
+}
+
+#taskOptionsOverlay img {
+    width: 17px;
+    width: 17px;
 }
