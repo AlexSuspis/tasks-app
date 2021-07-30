@@ -1,6 +1,16 @@
+const newTaskTextInput = document.querySelector('#newTask input');
+//EVENT: User adds or deletes input. We want to toggle looks between 'newTask' and 'Task'
+newTaskTextInput.addEventListener('input', function (e) {
+    if (e.target.value !== '') {
+        console.log('non empty')
+    } else console.log('empty')
+})
 //EVENT: Task is created
-
-
+newTaskTextInput.addEventListener('change', function (e) {
+    if (e.target !== "") {
+        // alert('create new task')
+    }
+})
 
 
 //EVENT: Task options icon is clicked
@@ -12,6 +22,7 @@ for (let icon of optionIcons) {
         toggleElementVisibility(respectiveOverlayMenu);
     })
 }
+
 const toggleElementVisibility = (el) => {
     if (el.style.display === 'inline') {
         el.style.display = 'none';
@@ -24,8 +35,6 @@ const toggleElementVisibility = (el) => {
 //EVENT: Task’s text is modified
 //Trigger: A change in input element is detected. Only then 
 //is the AXIOS request sent.
-
-
 const textInputs = document.querySelectorAll('#task input');
 for (let textInput of textInputs) {
     textInput.addEventListener('change', function (e) {
