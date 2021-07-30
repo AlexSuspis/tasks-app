@@ -20,6 +20,12 @@ app.get('/tasks', (req, res) => {
     res.render('tasks/index', { tasks })
 })
 
+app.post('/task', (req, res) => {
+    const { text } = req.body;
+    //create new task from task model
+    //save to database
+})
+
 //PATCH endpoint for changing the following task properties: subtasks array, colour, labels array, inner text
 // app.patch('/tasks/:id', (req, res) => {
 //     let { id } = req.params;
