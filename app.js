@@ -5,6 +5,8 @@ const { v4: uuid } = require('uuid');
 const bodyParser = require('body-parser');
 const { tasks } = require('./seeds/mock_data');
 
+const Task = require('./models/task');
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -48,16 +50,12 @@ app.patch('/task/:id/text', (req, res) => {
 
     let { id } = req.params;
     const { newText } = req.body;
-    console.log(req.body)
-    console.log(newText);
 
-    //find task with unique id
-    let task = tasks.find(t => t.id === parseInt(id));
-    if (task.text !== newText) {
-        task.text = newText;
-    }
+    // console.log(req.body)
+    // console.log(newText);
+
+    const task = Task.findById({ id });
     console.log(task);
-
 })
 app.patch('/task/:id/colour', (req, res) => {
     console.log('task colour change patch route');
