@@ -6,7 +6,7 @@ wireEvents = (task) => {
             el.style.display = 'inline';
         }
     }
-    toggleOptionsMenu = (e) => {
+    taskOptionsToggled = (e) => {
         const overlayMenu = e.target.nextElementSibling;
         toggleElementVisibility(overlayMenu);
     }
@@ -20,7 +20,7 @@ wireEvents = (task) => {
         alert('task deleted event');
     }
 
-    task.querySelector("#optionsIcon").addEventListener('click', toggleOptionsMenu);
+    task.querySelector("#optionsIcon").addEventListener('click', taskOptionsToggled);
     task.querySelector("#taskButton").addEventListener('click', taskCompleted);
     task.querySelector("#taskTextInput").addEventListener('change', taskTextChangedEvent);
     task.querySelector("#deleteTaskIcon").addEventListener('click', taskDeleted);
@@ -28,20 +28,20 @@ wireEvents = (task) => {
 }
 
 //EVENT: Task is created
-const newTaskTextInput = document.querySelector('#newTaskDiv input');
+const textInputForNewTask = document.querySelector('#newTaskDiv input');
 createNewTask = (e) => {
     if (e.target !== "") {
-        createTaskComponent = (taskId, text) => {
+        createTaskDiv = (taskId, text) => {
 
             const taskDiv = document.createElement("div");
             taskDiv.setAttribute("id", "task");
             taskDiv.setAttribute("data-task_id", taskId);
 
-            const taskComponent = document.querySelector("#clone-new-task");
-            const newTaskComponent = taskComponent.cloneNode(true);
-            newTaskComponent.querySelector('input').value = text;
+            const task = document.querySelector("#clone-new-task");
+            const newTask = task.cloneNode(true);
+            newTask.querySelector('input').value = text;
 
-            taskDiv.append(newTaskComponent);
+            taskDiv.append(newTask);
 
             return taskDiv;
         }
@@ -50,23 +50,22 @@ createNewTask = (e) => {
             .then((res) => {
                 const taskId = res.data
 
-                const newTask = createTaskComponent(taskId, text);
+                const newTask = createTaskDiv(taskId, text);
 
                 wireEvents(newTask);
 
                 document.querySelector("#container").append(newTask);
 
                 //reset text input for new task
-                newTaskTextInput.value = "";
-                newTaskTextInput.placeholder = "Add another item";
+                textInputForNewTask.value = "";
+                textInputForNewTask.placeholder = "Add another item";
             })
             .catch((err) => {
                 console.log(err)
             });
     }
 }
-newTaskTextInput.addEventListener('change', createNewTask);
-
+textInputForNewTask.addEventListener('change', createNewTask);
 
 const tasks = document.querySelectorAll("#task");
 tasks.forEach(task => wireEvents(task));
