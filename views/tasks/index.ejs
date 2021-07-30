@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
+    <link rel="stylesheet" href="/index.css">
     <link rel="stylesheet" href="/taskOptionsOverlay.css">
     <link rel="stylesheet" href="/taskComponent.css">
 </head>
@@ -17,6 +18,10 @@
             <%- include ("partials/taskComponent.ejs", {task}) %>
                 <% } %>
     </section>
+
+    <div class="newTask">
+        <span><img src="/plus.svg" alt="" id="plusIcon"></span>
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
