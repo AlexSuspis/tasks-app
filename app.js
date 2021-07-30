@@ -81,17 +81,10 @@ app.patch('/task/:id/label', (req, res) => {
 
 
 // DELETE a task
-app.delete('/tasks/:id', (req, res) => {
-    //we take in an id and remove the respective task from the array
-    let { id } = req.params;
-
-    //find index of task with unique id
-    let index = tasks.findIndex(t => t.id === parseInt(id));
-
-    tasks.splice(index, 1)
-    console.log(tasks)
-    res.send('task deleted!')
-
+app.delete('/task/:id', (req, res) => {
+    const { id } = req.params;
+    console.log("delete task endpoint");
+    console.log(req.params.id);
 })
 
 
