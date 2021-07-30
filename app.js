@@ -38,7 +38,7 @@ app.patch('/tasks/:id', (req, res) => {
     console.dir(tasks[0])
     res.send('patch req received!');
 })
-app.patch('/tasks/:id/text', (req, res) => {
+app.patch('/task/:id/text', (req, res) => {
 
     let { id } = req.params;
     const { newText } = req.body;
@@ -53,11 +53,11 @@ app.patch('/tasks/:id/text', (req, res) => {
     console.log(task);
 
 })
-app.patch('/tasks/:id/colour', (req, res) => {
+app.patch('/task/:id/colour', (req, res) => {
     console.log('task colour change patch route');
 
 })
-app.patch('/tasks/:id/label', (req, res) => {
+app.patch('/task/:id/label', (req, res) => {
     console.log('task label change patch route');
 
 })
