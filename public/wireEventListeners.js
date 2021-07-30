@@ -1,15 +1,5 @@
-const newTaskTextInput = document.querySelector('#newTaskDiv input');
-console.log(newTaskTextInput)
-
-//EVENT: User adds or deletes input. We want to toggle looks between 'newTask' and 'Task'
-//---------IMPLEMENTING LATER, TOO MUCH WORK NOW---------
-// newTaskTextInput.addEventListener('input', function (e) {
-//     if (e.target.value !== '') {
-//         console.log('non empty')
-//     } else console.log('empty')
-// })
-
 //EVENT: Task is created
+const newTaskTextInput = document.querySelector('#newTaskDiv input');
 newTaskTextInput.addEventListener('change', function (e) {
     if (e.target !== "") {
         axios.post('/task', { text: e.target.value })
@@ -37,8 +27,6 @@ newTaskTextInput.addEventListener('change', function (e) {
                 taskDiv.append(document.createTextNode("\u00A0"));
 
                 document.querySelector("#container").append(taskDiv);
-
-
 
                 //reset new task component
                 newTaskTextInput.value = "";
