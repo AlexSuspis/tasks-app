@@ -1,6 +1,6 @@
 <div id="task" data-task_id="<%=task._id%>">
     <button id="taskButton">task</button>
-    <input type="text" id="taskTextInput" value="<%= task.text %> <%= task.id %>">
+    <input type="text" id="taskTextInput" value="<%= task.text %>">
     <span>
         <img src="/pen.svg" alt="" id="optionsIcon">
         <%- include ("taskOptionsOverlay.ejs") %>
