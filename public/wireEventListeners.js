@@ -3,15 +3,29 @@
 //POST
 //PATCH
 //DELETE
-toggleOptionsMenu = (e) => {
-    const overlayMenu = e.target.nextElementSibling;
-    toggleElementVisibility(overlayMenu);
-}
-taskTextChangedEvent = (e) => {
-    alert('task text changed');
-}
-taskCompleted = (e) => {
-    alert('task completed event!');
+
+wireEvents = (task) => {
+    toggleElementVisibility = (el) => {
+        if (el.style.display === 'inline') {
+            el.style.display = 'none';
+        } else {
+            el.style.display = 'inline';
+        }
+    }
+    toggleOptionsMenu = (e) => {
+        const overlayMenu = e.target.nextElementSibling;
+        toggleElementVisibility(overlayMenu);
+    }
+    taskTextChangedEvent = (e) => {
+        alert('task text changed');
+    }
+    taskCompleted = (e) => {
+        alert('task completed event!');
+    }
+
+    task.querySelector("#optionsIcon").addEventListener('click', toggleOptionsMenu);
+    task.querySelector("#taskButton").addEventListener('click', taskCompleted);
+    task.querySelector("#taskTextInput").addEventListener('change', taskTextChangedEvent);
 }
 
 //EVENT: Task is created
@@ -32,11 +46,6 @@ newTaskCreated = (e) => {
 
             return taskDiv;
         }
-        wireEvents = (newTask) => {
-            newTask.querySelector("#optionsIcon").addEventListener('click', toggleOptionsMenu);
-            newTask.querySelector("#taskButton").addEventListener('click', taskCompleted);
-            newTask.querySelector("#taskTextInput").addEventListener('change', taskTextChangedEvent);
-        }
         const text = e.target.value;
         axios.post('/task', { text })
             .then((res) => {
@@ -44,11 +53,8 @@ newTaskCreated = (e) => {
 
                 const newTask = createNewTask(taskId, text);
 
-                //WIRE EVENTS
-                //wire button of new task div with task completed event
-                //wire input with text change event
-                //wire optionIcon
                 wireEvents(newTask);
+
                 document.querySelector("#container").append(newTask);
 
                 //reset text input for new task
@@ -63,66 +69,9 @@ newTaskCreated = (e) => {
 newTaskTextInput.addEventListener('change', newTaskCreated);
 
 
-
-
-//EVENT: Task options icon is clicked
-//Expand task options (Click on options icon)
-const optionIcons = document.querySelectorAll("#optionsIcon");
-for (let icon of optionIcons) {
-    icon.addEventListener('click', toggleOptionsMenu);
+const tasks = document.querySelectorAll("#task");
+for (let task of tasks) {
+    wireEvents(task);
 }
 
-const toggleElementVisibility = (el) => {
-    if (el.style.display === 'inline') {
-        el.style.display = 'none';
-    } else {
-        el.style.display = 'inline';
-    }
-}
-
-
-//EVENT: Task’s text is modified
-//Trigger: A change in input element is detected. Only then 
-//is the AXIOS request sent.
-const textInputs = document.querySelectorAll('#task input');
-for (let textInput of textInputs) {
-    textInput.addEventListener('change', taskTextChangedEvent)
-}
-
-//EVENT: Task’s colour is changed
-//Trigger: Colour pallette pops up when colour icon is clicked in 
-//expanded OverlayMenu. When a colour is successfully saved, PATCH request sent.
-
-
-//EVENT: Task has been completed
-//Trigger: Circular button in task's object has been clicked
-
-const taskButtons = document.querySelectorAll('#task #taskButton');
-for (let button of taskButtons) {
-    button.addEventListener('click', taskCompleted)
-}
-
-
-//EVENT: Subtask has been completed
-
-const subtaskButtons = document.querySelectorAll('#task #subtaskButton');
-for (let button of subtaskButtons) {
-    button.addEventListener('click', function () {
-        alert('subtask completed event!')
-    })
-}
-
-//EVENT: Label is added to task
-// const labelIcons = document.querySelectorAll('');
-
-
-//EVENT: Subtask has been created
-//Trigger: Subtask icon in OverlayMenu is clicked.
-
-
-//EVENT: Task’s order is changed
-// click and drag
-
-//EVENT: Task has been deleted
-//Trigger: Trash icon in task's overlay menu is clicked
 
