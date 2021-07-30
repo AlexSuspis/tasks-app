@@ -11,8 +11,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static('public'))
 app.use(express.static('images'))
-app.use(express.urlencoded())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
 
 
 // GET all tasks
@@ -39,15 +39,18 @@ app.patch('/tasks/:id', (req, res) => {
     res.send('patch req received!');
 })
 app.patch('/tasks/:id/text', (req, res) => {
-    // let { id } = req.params;
-    // const { newText } = req.body;
-    // //find task with unique id
-    // let task = tasks.find(t => t.id === parseInt(id));
-    // if (task.text !== newText) {
-    //     task.text = newText;
-    // }
-    // console.log(task);
-    console.log('task text change patch route');
+
+    let { id } = req.params;
+    const { newText } = req.body;
+    console.log(req.body)
+    console.log(newText);
+
+    //find task with unique id
+    let task = tasks.find(t => t.id === parseInt(id));
+    if (task.text !== newText) {
+        task.text = newText;
+    }
+    console.log(task);
 
 })
 app.patch('/tasks/:id/colour', (req, res) => {

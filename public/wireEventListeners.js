@@ -23,9 +23,9 @@ const toggleElementVisibility = (el) => {
 
 const textInputs = document.querySelectorAll('#task input')
 for (let textInput of textInputs) {
-    textInput.addEventListener('change', function () {
-        // alert("text has been changed!");
-        axios.patch('/tasks/2/text')
+    textInput.addEventListener('change', function (e) {
+        console.log(e.target.value)
+        axios.patch('/tasks/2/text', { newText: e.target.value })
             .then(function (res) {
                 console.log(res);
             })
