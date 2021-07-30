@@ -33,8 +33,9 @@ app.post('/task', async (req, res) => {
         text
     });
 
-    const response = await t.save();
-    console.log(response);
+    // await t.save();
+
+    res.send(t._id);
 
 });
 

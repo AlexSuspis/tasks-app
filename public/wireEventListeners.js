@@ -1,4 +1,5 @@
-const newTaskTextInput = document.querySelector('#newTask input');
+const newTaskTextInput = document.querySelector('#newTaskDiv input');
+console.log(newTaskTextInput)
 
 //EVENT: User adds or deletes input. We want to toggle looks between 'newTask' and 'Task'
 //---------IMPLEMENTING LATER, TOO MUCH WORK NOW---------
@@ -13,8 +14,35 @@ newTaskTextInput.addEventListener('change', function (e) {
     if (e.target !== "") {
         axios.post('/task', { text: e.target.value })
             .then((res) => {
+                const taskId = res.data
+
                 //create html for new task, and append it to task container div.
+                //  get task id from res.data, and wire it onto task div in html code
+                const taskDiv = document.createElement("div");
+                taskDiv.setAttribute("id", "task");
+                taskDiv.setAttribute("data-task_id", taskId);
+                console.log(taskDiv);
+
+                const button = document.createElement("button");
+                button.setAttribute("id", "taskButton");
+                button.innerText = "test";
+                taskDiv.prepend(button);
+                //white space between button and next element
+                taskDiv.append(document.createTextNode("\u00A0"));
+
+                const input = document.createElement("input")
+                input.value = e.target.value;
+                input.setAttribute("id", "taskTextInput");
+                taskDiv.append(input);
+                taskDiv.append(document.createTextNode("\u00A0"));
+
+                document.querySelector("#container").append(taskDiv);
+
+
+
                 //reset new task component
+                newTaskTextInput.value = "";
+                newTaskTextInput.placeholder = "Add another item";
             })
             .catch((err) => {
                 alert(err)
