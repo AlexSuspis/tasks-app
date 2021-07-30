@@ -1,10 +1,12 @@
 <div id="task" data-task_id="<%=task._id%>">
-    <button id="taskButton">task</button>
-    <input type="text" id="taskTextInput" value="<%= task.text %>">
-    <span>
-        <img src="/pen.svg" alt="" id="optionsIcon">
-        <%- include ("taskOptionsOverlay.ejs") %>
-    </span>
+    <div id="clone-new-task">
+        <button id="taskButton">task</button>
+        <input type="text" id="taskTextInput" value="<%= task.text %>">
+        <span id="optionsContainer">
+            <img src="/pen.svg" alt="" id="optionsIcon">
+            <%- include ("taskOptionsOverlay.ejs") %>
+        </span>
+    </div>
     <%for(subtask of task.subtasks){%>
         <div id="subtask">
             <button id="subtaskButton">subtask</button>

@@ -2,33 +2,22 @@
 const newTaskTextInput = document.querySelector('#newTaskDiv input');
 newTaskTextInput.addEventListener('change', function (e) {
     if (e.target !== "") {
-        axios.post('/task', { text: e.target.value })
+        const text = e.target.value;
+        axios.post('/task', { text })
             .then((res) => {
                 const taskId = res.data
 
-                //create html for new task, and append it to task container div.
-                //  get task id from res.data, and wire it onto task div in html code
-                const taskDiv = document.createElement("div");
-                taskDiv.setAttribute("id", "task");
-                taskDiv.setAttribute("data-task_id", taskId);
-                console.log(taskDiv);
+                const taskDiv = createTaskDiv(taskId, text);
 
-                const button = document.createElement("button");
-                button.setAttribute("id", "taskButton");
-                button.innerText = "test";
-                taskDiv.prepend(button);
-                //white space between button and next element
-                taskDiv.append(document.createTextNode("\u00A0"));
+                //WIRE EVENTS
+                //wire button of new task div with task completed event
+                //wire input with text change event
 
-                const input = document.createElement("input")
-                input.value = e.target.value;
-                input.setAttribute("id", "taskTextInput");
-                taskDiv.append(input);
-                taskDiv.append(document.createTextNode("\u00A0"));
+
 
                 document.querySelector("#container").append(taskDiv);
 
-                //reset new task component
+                //reset text input for new task
                 newTaskTextInput.value = "";
                 newTaskTextInput.placeholder = "Add another item";
             })
@@ -36,17 +25,36 @@ newTaskTextInput.addEventListener('change', function (e) {
                 alert(err)
             });
     }
-})
+});
 
+createTaskDiv = (taskId, text) => {
+    const taskDiv = document.createElement("div");
+    taskDiv.setAttribute("id", "task");
+    taskDiv.setAttribute("data-task_id", taskId);
+    console.log(taskDiv);
+
+    const taskComponent = document.querySelector("#clone-new-task");
+    const newTaskComponent = taskComponent.cloneNode(true);
+    newTaskComponent.querySelector('input').value = text;
+
+    taskDiv.append(newTaskComponent);
+
+    return taskDiv;
+}
+
+wireNewTaskComponentEvents = (taskDiv) => {
+
+}
 
 //EVENT: Task options icon is clicked
 //Expand task options (Click on options icon)
+optionsIconClickEventListener = (e) => {
+    const overlayMenu = e.target.nextElementSibling;
+    toggleElementVisibility(overlayMenu);
+}
 const optionIcons = document.querySelectorAll("#optionsIcon");
 for (let icon of optionIcons) {
-    icon.addEventListener('click', function (e) {
-        const respectiveOverlayMenu = e.target.nextElementSibling;
-        toggleElementVisibility(respectiveOverlayMenu);
-    })
+    icon.addEventListener('click', optionsIconClickEventListener);
 }
 
 const toggleElementVisibility = (el) => {
@@ -110,12 +118,6 @@ for (let button of subtaskButtons) {
 
 //EVENT: Subtask has been created
 //Trigger: Subtask icon in OverlayMenu is clicked.
-
-
-binIcon
-taskIcon
-colourPaletteIcon
-labelIcon
 
 
 //EVENT: Task’s order is changed
