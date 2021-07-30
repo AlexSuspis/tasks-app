@@ -1,5 +1,5 @@
 #task{
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 #optionsIcon {
     height: 17px;
@@ -7,4 +7,6 @@
 }
 #subtask{
     margin-left: 2em;
+    margin-top: 5px;
+    margin-bottom:3px;
 }

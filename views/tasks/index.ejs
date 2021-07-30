@@ -12,12 +12,10 @@
 <body>
     <h1>Index.ejs view!</h1>
 
-    <section>
-        <ul id="container">
-            <% for(let task of tasks){ %>
-                <%- include ("partials/taskComponent.ejs", {task}) %>
-                    <% } %>
-        </ul>
+    <section id="container">
+        <% for(let task of tasks){ %>
+            <%- include ("partials/taskComponent.ejs", {task}) %>
+                <% } %>
     </section>
 
 

@@ -1,3 +1,8 @@
+//EVENT: Task is created
+
+
+
+
 //EVENT: Task options icon is clicked
 //Expand task options (Click on options icon)
 const optionIcons = document.querySelectorAll("#optionsIcon");
@@ -21,19 +26,22 @@ const toggleElementVisibility = (el) => {
 //is the AXIOS request sent.
 
 
-const textInputs = document.querySelectorAll('#task input')
+const textInputs = document.querySelectorAll('#task input');
 for (let textInput of textInputs) {
     textInput.addEventListener('change', function (e) {
-        console.log(e.target.value)
-        axios.patch('/task/2/text', { newText: e.target.value })
-            .then(function (res) {
-                console.log(res);
-            })
-            .catch(function (err) {
-                console.log(err);
-            })
+        console.log(e.target.parentElement.getAttribute('data-task_id'));
+        //     console.log(e.target.value)
+        //     axios.patch('/task/2/text', { newText: e.target.value })
+        //         .then(function (res) {
+        //             console.log(res);
+        //         })
+        //         .catch(function (err) {
+        //             console.log(err);
+        //         })
 
-    });
+        // });
+    }
+    )
 }
 
 //EVENT: Task’s colour is changed
