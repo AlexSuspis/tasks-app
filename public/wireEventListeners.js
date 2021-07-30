@@ -20,10 +20,19 @@ const toggleElementVisibility = (el) => {
 //Trigger: A change in input element is detected. Only then 
 //is the AXIOS request sent.
 
+
 const textInputs = document.querySelectorAll('#task input')
 for (let textInput of textInputs) {
     textInput.addEventListener('change', function () {
-        alert("text has been changed!");
+        // alert("text has been changed!");
+        axios.patch('/tasks/2/text')
+            .then(function (res) {
+                console.log(res);
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+
     });
 }
 

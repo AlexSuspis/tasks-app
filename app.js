@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const { tasks } = require('./mock_data/tasks');
 const { kMaxLength } = require('buffer');
 
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -40,20 +39,23 @@ app.patch('/tasks/:id', (req, res) => {
     res.send('patch req received!');
 })
 app.patch('/tasks/:id/text', (req, res) => {
-    let { id } = req.params;
-    const { newText } = req.body;
-    //find task with unique id
-    let task = tasks.find(t => t.id === parseInt(id));
-    if (task.text !== newText) {
-        task.text = newText;
-    }
-    console.log(task);
+    // let { id } = req.params;
+    // const { newText } = req.body;
+    // //find task with unique id
+    // let task = tasks.find(t => t.id === parseInt(id));
+    // if (task.text !== newText) {
+    //     task.text = newText;
+    // }
+    // console.log(task);
+    console.log('task text change patch route');
 
 })
 app.patch('/tasks/:id/colour', (req, res) => {
+    console.log('task colour change patch route');
 
 })
 app.patch('/tasks/:id/label', (req, res) => {
+    console.log('task label change patch route');
 
 })
 
