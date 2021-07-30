@@ -1,9 +1,3 @@
-//TASK CRUD EVENTS
-//CREATE
-//POST
-//PATCH
-//DELETE
-
 wireEvents = (task) => {
     toggleElementVisibility = (el) => {
         if (el.style.display === 'inline') {
@@ -22,17 +16,22 @@ wireEvents = (task) => {
     taskCompleted = (e) => {
         alert('task completed event!');
     }
+    taskDeleted = (e) => {
+        alert('task deleted event');
+    }
 
     task.querySelector("#optionsIcon").addEventListener('click', toggleOptionsMenu);
     task.querySelector("#taskButton").addEventListener('click', taskCompleted);
     task.querySelector("#taskTextInput").addEventListener('change', taskTextChangedEvent);
+    task.querySelector("#deleteTaskIcon").addEventListener('click', taskDeleted);
+    task.querySelector("#newTaskIcon").addEventListener('click', createNewTask);
 }
 
 //EVENT: Task is created
 const newTaskTextInput = document.querySelector('#newTaskDiv input');
-newTaskCreated = (e) => {
+createNewTask = (e) => {
     if (e.target !== "") {
-        createNewTask = (taskId, text) => {
+        createTaskComponent = (taskId, text) => {
 
             const taskDiv = document.createElement("div");
             taskDiv.setAttribute("id", "task");
@@ -51,7 +50,7 @@ newTaskCreated = (e) => {
             .then((res) => {
                 const taskId = res.data
 
-                const newTask = createNewTask(taskId, text);
+                const newTask = createTaskComponent(taskId, text);
 
                 wireEvents(newTask);
 
@@ -66,12 +65,10 @@ newTaskCreated = (e) => {
             });
     }
 }
-newTaskTextInput.addEventListener('change', newTaskCreated);
+newTaskTextInput.addEventListener('change', createNewTask);
 
 
 const tasks = document.querySelectorAll("#task");
-for (let task of tasks) {
-    wireEvents(task);
-}
+tasks.forEach(task => wireEvents(task));
 
 
