@@ -1,60 +1,75 @@
+//TASK CRUD EVENTS
+//CREATE
+//POST
+//PATCH
+//DELETE
+toggleOptionsMenu = (e) => {
+    const overlayMenu = e.target.nextElementSibling;
+    toggleElementVisibility(overlayMenu);
+}
+taskTextChangedEvent = (e) => {
+    alert('task text changed');
+}
+taskCompleted = (e) => {
+    alert('task completed event!');
+}
+
 //EVENT: Task is created
 const newTaskTextInput = document.querySelector('#newTaskDiv input');
-newTaskTextInput.addEventListener('change', function (e) {
+newTaskCreated = (e) => {
     if (e.target !== "") {
+        createNewTask = (taskId, text) => {
+
+            const taskDiv = document.createElement("div");
+            taskDiv.setAttribute("id", "task");
+            taskDiv.setAttribute("data-task_id", taskId);
+
+            const taskComponent = document.querySelector("#clone-new-task");
+            const newTaskComponent = taskComponent.cloneNode(true);
+            newTaskComponent.querySelector('input').value = text;
+
+            taskDiv.append(newTaskComponent);
+
+            return taskDiv;
+        }
+        wireEvents = (newTask) => {
+            newTask.querySelector("#optionsIcon").addEventListener('click', toggleOptionsMenu);
+            newTask.querySelector("#taskButton").addEventListener('click', taskCompleted);
+            newTask.querySelector("#taskTextInput").addEventListener('change', taskTextChangedEvent);
+        }
         const text = e.target.value;
         axios.post('/task', { text })
             .then((res) => {
                 const taskId = res.data
 
-                const taskDiv = createTaskDiv(taskId, text);
+                const newTask = createNewTask(taskId, text);
 
                 //WIRE EVENTS
                 //wire button of new task div with task completed event
                 //wire input with text change event
-
-
-
-                document.querySelector("#container").append(taskDiv);
+                //wire optionIcon
+                wireEvents(newTask);
+                document.querySelector("#container").append(newTask);
 
                 //reset text input for new task
                 newTaskTextInput.value = "";
                 newTaskTextInput.placeholder = "Add another item";
             })
             .catch((err) => {
-                alert(err)
+                console.log(err)
             });
     }
-});
-
-createTaskDiv = (taskId, text) => {
-    const taskDiv = document.createElement("div");
-    taskDiv.setAttribute("id", "task");
-    taskDiv.setAttribute("data-task_id", taskId);
-    console.log(taskDiv);
-
-    const taskComponent = document.querySelector("#clone-new-task");
-    const newTaskComponent = taskComponent.cloneNode(true);
-    newTaskComponent.querySelector('input').value = text;
-
-    taskDiv.append(newTaskComponent);
-
-    return taskDiv;
 }
+newTaskTextInput.addEventListener('change', newTaskCreated);
 
-wireNewTaskComponentEvents = (taskDiv) => {
 
-}
+
 
 //EVENT: Task options icon is clicked
 //Expand task options (Click on options icon)
-optionsIconClickEventListener = (e) => {
-    const overlayMenu = e.target.nextElementSibling;
-    toggleElementVisibility(overlayMenu);
-}
 const optionIcons = document.querySelectorAll("#optionsIcon");
 for (let icon of optionIcons) {
-    icon.addEventListener('click', optionsIconClickEventListener);
+    icon.addEventListener('click', toggleOptionsMenu);
 }
 
 const toggleElementVisibility = (el) => {
@@ -71,20 +86,7 @@ const toggleElementVisibility = (el) => {
 //is the AXIOS request sent.
 const textInputs = document.querySelectorAll('#task input');
 for (let textInput of textInputs) {
-    textInput.addEventListener('change', function (e) {
-        console.log(e.target.parentElement.getAttribute('data-task_id'));
-        //     console.log(e.target.value)
-        //     axios.patch('/task/2/text', { newText: e.target.value })
-        //         .then(function (res) {
-        //             console.log(res);
-        //         })
-        //         .catch(function (err) {
-        //             console.log(err);
-        //         })
-
-        // });
-    }
-    )
+    textInput.addEventListener('change', taskTextChangedEvent)
 }
 
 //EVENT: Task’s colour is changed
@@ -97,9 +99,7 @@ for (let textInput of textInputs) {
 
 const taskButtons = document.querySelectorAll('#task #taskButton');
 for (let button of taskButtons) {
-    button.addEventListener('click', function () {
-        alert('task completed event!')
-    })
+    button.addEventListener('click', taskCompleted)
 }
 
 
