@@ -3,8 +3,7 @@ const app = express();
 const path = require('path');
 const { v4: uuid } = require('uuid');
 const bodyParser = require('body-parser');
-const { tasks } = require('./mock_data/tasks');
-const { kMaxLength } = require('buffer');
+const { tasks } = require('./seeds/mock_data');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
