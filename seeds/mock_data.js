@@ -1,6 +1,5 @@
 module.exports.tasks = [
     {
-        id: 1,
         text: 'Feed cat',
         subtasks: [
             {
@@ -14,7 +13,6 @@ module.exports.tasks = [
         colour: 'red'
     },
     {
-        id: 2,
         text: 'Water plants',
         subtasks: [
             {
