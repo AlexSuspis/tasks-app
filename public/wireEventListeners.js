@@ -13,7 +13,8 @@ newTaskTextInput.addEventListener('change', function (e) {
     if (e.target !== "") {
         axios.post('/task', { text: e.target.value })
             .then((res) => {
-                console.log(res.data);
+                //create html for new task, and append it to task container div.
+                //reset new task component
             })
             .catch((err) => {
                 alert(err)

@@ -4,6 +4,7 @@ const path = require('path');
 const { v4: uuid } = require('uuid');
 const bodyParser = require('body-parser');
 const { tasks } = require('./seeds/mock_data');
+const mongoose = require('mongoose');
 
 const Task = require('./models/task');
 
@@ -15,17 +16,27 @@ app.use(express.static('images'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
+const dbUrl = 'mongodb://localhost:27017/tasks-app';
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to database'))
+    .catch((err) => console.log(err));
 
 // GET all tasks
 app.get('/tasks', (req, res) => {
     res.render('tasks/index', { tasks })
 })
 
-app.post('/task', (req, res) => {
+app.post('/task', async (req, res) => {
     const { text } = req.body;
-    //create new task from task model
-    //save to database
-})
+
+    const t = new Task({
+        text
+    });
+
+    const response = await t.save();
+    console.log(response);
+
+});
 
 //PATCH endpoint for changing the following task properties: subtasks array, colour, labels array, inner text
 // app.patch('/tasks/:id', (req, res) => {
