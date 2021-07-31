@@ -24,5 +24,15 @@ module.exports.tasks = [
         ],
         labels: [],
         colour: 'red'
+    },
+    {
+        text: 'this is a test',
+        subtasks: [
+            {
+                text: 'i will probably change the subtask model/structure thingy'
+            }
+        ],
+        labels: [],
+        colour: 'red'
     }
 ]

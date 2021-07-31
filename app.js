@@ -35,10 +35,7 @@ app.post('/task', async (req, res) => {
         text
     });
 
-    // await t.save();
-
     res.send(t._id);
-
 });
 
 //PATCH endpoint for changing the following task properties: subtasks array, colour, labels array, inner text
@@ -88,7 +85,6 @@ app.delete('/task/:id', async (req, res) => {
 
     res.send(data);
 })
-
 
 const port = 3000;
 app.listen(port, () => {

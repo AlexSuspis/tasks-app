@@ -34,6 +34,7 @@ wireEvents = (task) => {
 
         const taskDiv = findAncestorElementWithId(e.target, "task");
         const taskId = taskDiv.getAttribute("data-task_id");
+        console.log(taskId)
 
         axios.delete(`/task/${taskId}`)
             .then(() => {
