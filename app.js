@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const { v4: uuid } = require('uuid');
 const bodyParser = require('body-parser');
-const { tasks } = require('./seeds/mock_data');
+// const { tasks } = require('./seeds/mock_data');
 const mongoose = require('mongoose');
 
 const Task = require('./models/task');
@@ -22,7 +22,9 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .catch((err) => console.log(err));
 
 // GET all tasks
-app.get('/tasks', (req, res) => {
+app.get('/tasks', async (req, res) => {
+    const tasks = await Task.find({});
+
     res.render('tasks/index', { tasks })
 })
 
@@ -78,13 +80,13 @@ app.patch('/task/:id/label', (req, res) => {
 
 })
 
-
-
 // DELETE a task
-app.delete('/task/:id', (req, res) => {
+app.delete('/task/:id', async (req, res) => {
     const { id } = req.params;
-    console.log("delete task endpoint");
-    console.log(req.params.id);
+
+    const data = await Task.findOneAndDelete({ _id: id });
+
+    res.send(data);
 })
 
 

@@ -17,22 +17,34 @@ wireEvents = (task) => {
         alert('task completed event!');
     }
     taskDeleted = (e) => {
-        // alert('task deleted event');
-        //delete from DOM
+        findAncestorElementWithId = (startElement, targetId) => {
 
-        //must implement function which goes up the dom until it find an element with the id of task.
-        //then we extract the data-task_id attribute from the div, and perform the axios request that way.
-        //https://stackoverflow.com/questions/6856871/getting-the-parent-div-of-element
+            let ancestor = startElement.parentElement;
+            do {
+                if (ancestor.getAttribute("id") === targetId) {
+                    return ancestor;
+                }
+            } while ((ancestor = ancestor.parentElement) !== null);
 
-        console.log(e.target)
+            return null;
+        }
+
+
+        //remove from database
+
+        const taskDiv = findAncestorElementWithId(e.target, "task");
+        const taskId = taskDiv.getAttribute("data-task_id");
+
         axios.delete(`/task/${taskId}`)
-            .then(res => {
-                console.log(res.data);
+            .then(() => {
+                console.log(`Removed task with id '${taskId}' from database\n`);
             })
             .catch(err => {
-                console.log(err);
+                console.log("Error occurred in axios DELETE request", err);
             })
-        //delete from server
+
+        //remove from DOM
+        taskDiv.remove();
     }
 
     task.querySelector("#optionsIcon").addEventListener('click', taskOptionsToggled);
