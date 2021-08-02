@@ -25,11 +25,19 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 app.get('/tasks', async (req, res) => {
     const tasks = await Task.find({});
 
+    //order tasks based on their position
+
     res.render('tasks/index', { tasks })
 })
 
 app.post('/task', async (req, res) => {
     const { text } = req.body;
+
+    //used for the creation of both subtasks and tasks?
+
+    //find position to give this task. It comes from client side in req.body,
+    //or do we fetch all tasks, see what the last position is, and add +1?
+
 
     const t = new Task({
         text
@@ -39,6 +47,69 @@ app.post('/task', async (req, res) => {
 
     res.send(t._id);
 });
+
+app.patch('/task/:id/text', async (req, res) => {
+
+    let { id } = req.params;
+    const { newText } = req.body;
+
+    const task = Task.findById({ id });
+})
+app.patch('/task/:id/colour', (req, res) => {
+    console.log('task colour change patch route');
+
+})
+app.patch('/task/:id/label', (req, res) => {
+    console.log('task label change patch route');
+
+})
+
+app.patch('/task/:id/position', (req, res) => {
+    //for when only a reodering occurs. No promotion or demotion of tasks.
+    //A task stays a task and a subtask stays a subtask.
+
+    //take new position from req.body
+    //fetch task by id
+    //update position property
+    //save task
+})
+
+app.patch('/task/:id/promote', (req, res) => {
+    //take id of task 1 from req.params, and id from task 2 from req.body
+    //task 1 is being promoted
+    //we remove task 2's id from task 1's parentTask property 
+    //we remove task 1's id from task 2's subtask array
+    //we update task 1's position which is in req.body
+    //we save both tasks 
+
+})
+app.patch('/task/:id/demote', (req, res) => {
+    //take a given task 1, and make it a subtask of another task 2
+    //take id of task one from params, and id of task 2 from req.body
+    //add task 1 id to task 2's subtasks array
+    //add task 2's id to parentTask property of task 1
+    //update task 1's position. include new position in req.body
+    //save both tasks
+})
+
+// DELETE a task
+app.delete('/task/:id', async (req, res) => {
+    const { id } = req.params;
+
+    const data = await Task.findOneAndDelete({ _id: id });
+
+    res.send(data);
+})
+
+const port = 3000;
+app.listen(port, () => {
+    console.log("Listening on port " + port + "; press ctrl-c to exit")
+})
+
+
+
+
+
 
 //PATCH endpoint for changing the following task properties: subtasks array, colour, labels array, inner text
 // app.patch('/tasks/:id', (req, res) => {
@@ -58,33 +129,3 @@ app.post('/task', async (req, res) => {
 //     console.dir(tasks[0])
 //     res.send('patch req received!');
 // })
-
-app.patch('/task/:id/text', async (req, res) => {
-
-    let { id } = req.params;
-    const { newText } = req.body;
-
-    const task = Task.findById({ id });
-})
-app.patch('/task/:id/colour', (req, res) => {
-    console.log('task colour change patch route');
-
-})
-app.patch('/task/:id/label', (req, res) => {
-    console.log('task label change patch route');
-
-})
-
-// DELETE a task
-app.delete('/task/:id', async (req, res) => {
-    const { id } = req.params;
-
-    const data = await Task.findOneAndDelete({ _id: id });
-
-    res.send(data);
-})
-
-const port = 3000;
-app.listen(port, () => {
-    console.log("Listening on port " + port + "; press ctrl-c to exit")
-})
