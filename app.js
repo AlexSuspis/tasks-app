@@ -24,7 +24,6 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 // GET all tasks
 app.get('/tasks', async (req, res) => {
     const tasks = await Task.find({});
-
     res.render('tasks/index', { tasks })
 })
 

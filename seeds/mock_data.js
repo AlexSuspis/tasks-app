@@ -7,11 +7,11 @@ module.exports.tasks = [
     {
         text: 'Water plants',
         labels: [],
-        colour: 'red'
+        colour: 'blue'
     },
     {
         text: 'this is a test',
         labels: [],
-        colour: 'red'
+        colour: 'black'
     }
 ]
