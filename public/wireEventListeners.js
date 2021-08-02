@@ -52,7 +52,9 @@ wireEvents = (task) => {
     task.querySelector("#taskButton").addEventListener('click', taskCompleted);
     task.querySelector("#taskTextInput").addEventListener('change', taskTextChangedEvent);
     task.querySelector("#deleteTaskIcon").addEventListener('click', taskDeleted);
-    task.querySelector("#newTaskIcon").addEventListener('click', createNewTask);
+
+    //paused for the time being because it breaks. it created a new task with no text.
+    // task.querySelector("#newTaskIcon").addEventListener('click', createNewTask);
 }
 
 //EVENT: Task is created

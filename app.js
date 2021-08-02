@@ -24,6 +24,7 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 // GET all tasks
 app.get('/tasks', async (req, res) => {
     const tasks = await Task.find({});
+
     res.render('tasks/index', { tasks })
 })
 
@@ -58,16 +59,12 @@ app.post('/task', async (req, res) => {
 //     res.send('patch req received!');
 // })
 
-app.patch('/task/:id/text', (req, res) => {
+app.patch('/task/:id/text', async (req, res) => {
 
     let { id } = req.params;
     const { newText } = req.body;
 
-    // console.log(req.body)
-    // console.log(newText);
-
     const task = Task.findById({ id });
-    console.log(task);
 })
 app.patch('/task/:id/colour', (req, res) => {
     console.log('task colour change patch route');
