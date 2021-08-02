@@ -10,3 +10,13 @@
     margin-top: 5px;
     margin-bottom:3px;
 }
+
+.myDragHandle{
+    background: rgba(244, 139, 60, 0.94);
+    border-radius: 50%;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    /* top right bottom left  */
+    margin: 0 4px 0 4px;
+}
