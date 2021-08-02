@@ -1,17 +1,19 @@
-<div id="task" data-task_id="<%=task._id%>">
-    <div id="clone-new-task">
-        <button id="taskButton">task</button>
-        <input type="text" id="taskTextInput" value="<%= task.text %>">
-        <span id="optionsContainer">
-            <img src="/pen.svg" alt="" id="optionsIcon">
-            <%- include ("taskOptionsOverlay.ejs") %>
-        </span>
-        <span class="myDragHandle"></span>
-    </div>
-    <%for(subtask of task.subtasks){%>
-        <div id="subtask">
-            <button id="subtaskButton">subtask</button>
-            <input type="subtaskTextInput" value="<%=subtask.text%>">
+<div class="taskContainer">
+    <div id="task" data-task_id="<%=task._id%>">
+        <div id="clone-new-task">
+            <button id="taskButton">task</button>
+            <input type="text" id="taskTextInput" value="<%= task.text %>">
+            <span id="optionsContainer">
+                <img src="/pen.svg" alt="" id="optionsIcon">
+                <%- include ("taskOptionsOverlay.ejs") %>
+            </span>
+            <div class="myDragHandle" draggable="true"></div>
         </div>
-        <%}%>
+        <%for(subtask of task.subtasks){%>
+            <div id="subtask">
+                <button id="subtaskButton">subtask</button>
+                <input type="subtaskTextInput" value="<%=subtask.text%>">
+            </div>
+            <%}%>
+    </div>
 </div>

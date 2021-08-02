@@ -1,5 +1,13 @@
 #task{
-    margin-bottom: 10px;
+    /* margin-bottom: 5px;
+    margin-top: 5px; */
+    /* margin-bottom: 10px; */
+}
+.taskContainer{
+    height: 46px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
 }
 /* #optionsIcon {
     height: 17px;

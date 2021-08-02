@@ -29,7 +29,6 @@ wireEvents = (task) => {
             return null;
         }
 
-
         //remove from database
 
         const taskDiv = findAncestorElementWithId(e.target, "task");
