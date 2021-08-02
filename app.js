@@ -71,7 +71,12 @@ app.patch('/task/:id/position', (req, res) => {
     //take new position from req.body
     //fetch task by id
     //update position property
+    //we take old position, new position, and we must adjust every other position for 
+    //affected tasks.
     //save task
+
+    const { newPosition } = req.body;
+    console.log(`New position is ${newPosition}`);
 })
 
 app.patch('/task/:id/promote', (req, res) => {
@@ -80,7 +85,11 @@ app.patch('/task/:id/promote', (req, res) => {
     //we remove task 2's id from task 1's parentTask property 
     //we remove task 1's id from task 2's subtask array
     //we update task 1's position which is in req.body
+    //we take old position, new position, and we must adjust every other position for 
+    //affected tasks.
     //we save both tasks 
+    const { newPosition } = req.body;
+    console.log(`PROMOTE: New position is ${newPosition}`);
 
 })
 app.patch('/task/:id/demote', (req, res) => {
@@ -90,6 +99,8 @@ app.patch('/task/:id/demote', (req, res) => {
     //add task 2's id to parentTask property of task 1
     //update task 1's position. include new position in req.body
     //save both tasks
+    const { newPosition } = req.body;
+    console.log(`DEMOTE: New position is ${newPosition}`);
 })
 
 // DELETE a task
