@@ -18,8 +18,8 @@ seedDB = async () => {
         const t = new Task({
             text: task.text,
             colour: task.colour,
-            subtasks: task.subtasks,
-            labels: task.labels
+            // subtasks: task.subtasks,
+            // labels: task.labels
         })
 
         await t.save();

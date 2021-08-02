@@ -7,7 +7,9 @@ const taskSchema = new Schema({
         required: true
     },
     colour: String,
-    subtasks: [],
+    subtasks: [Schema.Types.ObjectId],
+    parentTask: Schema.Types.ObjectId,
+    position: Number,
     labels: []
 })
 
