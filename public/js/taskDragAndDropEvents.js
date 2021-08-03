@@ -10,7 +10,7 @@ findAncestorElementWithId = (startElement, targetId) => {
     return null;
 }
 swapTaskPositions = (task1, task2) => {
-
+    console.log("swap task positions");
 }
 
 const dragHandles = document.querySelectorAll('.myDragHandle');
@@ -19,9 +19,7 @@ dragHandles.forEach(handle => handle.addEventListener('dragstart', dragStart));
 function dragStart(e) {
     const task = findAncestorElementWithId(e.target, "task");
     const taskId = task.getAttribute('data-task_id');
-    console.log(taskId);
     e.dataTransfer.setData("text/plain", taskId);
-    // console.log(e.dataTransfer.getData("text/plain"));
 }
 
 const taskContainers = document.querySelectorAll(".taskContainer");
@@ -48,7 +46,7 @@ function dragLeave(e) {
     // console.log('dragleave');
 }
 function drop(e) {
-    //to stop redirecting to taskId
+    //to stop redirecting bug
     e.preventDefault();
     const taskId = e.dataTransfer.getData('text/plain');
 
@@ -60,8 +58,9 @@ function drop(e) {
             draggedTask = task;
         }
     }
-
     const targetTask = findAncestorElementWithId(e.target, "task");
 
-    swapTaskPositions(draggedTask, targetTask);
+    if (targetTask != draggedTask) {
+        swapTaskPositions(draggedTask, targetTask);
+    }
 }
