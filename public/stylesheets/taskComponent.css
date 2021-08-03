@@ -3,7 +3,7 @@
     margin-top: 5px; */
     /* margin-bottom: 10px; */
 }
-.taskContainer{
+#taskContainer{
     height: 46px;
     display: flex;
     align-items: center;

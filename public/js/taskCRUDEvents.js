@@ -59,20 +59,16 @@ wireEvents = (task) => {
 const textInputForNewTask = document.querySelector('#newTaskDiv input');
 createNewTask = (e) => {
     if (e.target !== "") {
-        createTaskDiv = (taskId, text) => {
-
-            const taskDiv = document.createElement("div");
-            taskDiv.setAttribute("id", "task");
-            taskDiv.setAttribute("data-task_id", taskId);
-
+        createTask = (taskId, text) => {
             //if first task, there are no other tasks to clone!
-            const task = document.querySelector("#clone-new-task");
-            const newTask = task.cloneNode(true);
+            const anyTaskContainer = document.querySelector("#taskContainer");
+            const newTaskContainer = anyTaskContainer.cloneNode(true);
+            const newTask = newTaskContainer.querySelector('#task');
+            newTask.setAttribute("id", "task");
+            newTask.setAttribute("data-task_id", taskId);
             newTask.querySelector('input').value = text;
 
-            taskDiv.append(newTask);
-
-            return taskDiv;
+            return newTaskContainer;
         }
         newTaskPosition = () => {
             return document.querySelectorAll("#task").length + 1;
@@ -86,7 +82,7 @@ createNewTask = (e) => {
             .then((res) => {
                 const taskId = res.data
 
-                const newTask = createTaskDiv(taskId, text);
+                const newTask = createTask(taskId, text);
 
                 wireEvents(newTask);
 

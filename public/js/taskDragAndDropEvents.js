@@ -17,12 +17,13 @@ const dragHandles = document.querySelectorAll('.myDragHandle');
 dragHandles.forEach(handle => handle.addEventListener('dragstart', dragStart));
 
 function dragStart(e) {
+    console.log('drag start');
     const task = findAncestorElementWithId(e.target, "task");
     const taskId = task.getAttribute('data-task_id');
     e.dataTransfer.setData("text/plain", taskId);
 }
 
-const taskContainers = document.querySelectorAll(".taskContainer");
+const taskContainers = document.querySelectorAll("#taskContainer");
 taskContainers.forEach(div => {
     div.addEventListener('dragenter', dragEnter);
     div.addEventListener('dragover', dragOver);
