@@ -65,6 +65,7 @@ createNewTask = (e) => {
             taskDiv.setAttribute("id", "task");
             taskDiv.setAttribute("data-task_id", taskId);
 
+            //if first task, there are no other tasks to clone!
             const task = document.querySelector("#clone-new-task");
             const newTask = task.cloneNode(true);
             newTask.querySelector('input').value = text;
@@ -73,8 +74,15 @@ createNewTask = (e) => {
 
             return taskDiv;
         }
+        newTaskPosition = () => {
+            return document.querySelectorAll("#task").length + 1;
+        }
+
         const text = e.target.value;
-        axios.post('/task', { text })
+        const position = newTaskPosition();
+        console.log(position, "debug");
+
+        axios.post('/task', { text, position })
             .then((res) => {
                 const taskId = res.data
 

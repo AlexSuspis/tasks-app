@@ -24,23 +24,18 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 // GET all tasks
 app.get('/tasks', async (req, res) => {
     const tasks = await Task.find({});
-
+    console.log(tasks);
     //order tasks based on their position
 
     res.render('tasks/index', { tasks })
 })
 
 app.post('/task', async (req, res) => {
-    const { text } = req.body;
-
-    //used for the creation of both subtasks and tasks?
-
-    //find position to give this task. It comes from client side in req.body,
-    //or do we fetch all tasks, see what the last position is, and add +1?
-
+    const { text, position } = req.body;
 
     const t = new Task({
-        text
+        text,
+        position
     });
 
     t.save();

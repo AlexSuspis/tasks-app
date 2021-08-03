@@ -13,7 +13,6 @@
 
 <body>
     <h1>Index.ejs view!</h1>
-
     <section id="container">
         <% for(let task of tasks){ %>
             <%- include ("partials/taskComponent.ejs", {task}) %>
@@ -26,7 +25,7 @@
     </div>
 
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/taskCRUDEvents.js"></script>
     <script src="/js/taskDragAndDropEvents.js"></script>
 </body>
