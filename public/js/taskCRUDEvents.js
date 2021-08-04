@@ -1,4 +1,4 @@
-wireEvents = (task) => {
+wireCRUDEvents = (task) => {
     toggleElementVisibility = (el) => {
         if (el.style.display === 'inline') {
             el.style.display = 'none';
@@ -84,7 +84,7 @@ createNewTask = (e) => {
 
                 const newTask = createTask(taskId, text);
 
-                wireEvents(newTask);
+                wireCRUDEvents(newTask);
 
                 document.querySelector("#container").append(newTask);
 
@@ -100,6 +100,6 @@ createNewTask = (e) => {
 textInputForNewTask.addEventListener('change', createNewTask);
 
 const tasks = document.querySelectorAll("#task");
-tasks.forEach(task => wireEvents(task));
+tasks.forEach(task => wireCRUDEvents(task));
 
 
