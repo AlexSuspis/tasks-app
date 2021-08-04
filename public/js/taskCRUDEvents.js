@@ -71,6 +71,7 @@ newTaskCreated = (e) => {
 
                 wireCRUDEvents(newTask);
                 //need to wire drag and drop events too!
+                wireDragAndDropEvents(newTask);
 
                 document.querySelector("#container").append(newTask);
 

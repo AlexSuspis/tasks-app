@@ -19,6 +19,7 @@ const dragAndDropEvents = {
         const task = findAncestorElementWithId(e.target, "task");
         const taskId = task.getAttribute('data-task_id');
         e.dataTransfer.setData("text/plain", taskId);
+        console.log(taskId);
     },
     dragEnter: (e) => {
         //preventDefault() so we make the div a valid drop target
@@ -32,12 +33,13 @@ const dragAndDropEvents = {
     drop: (e) => {
         swapTaskPositions = (task1, task2) => {
             console.log("swap task positions event");
-            // console.log(task1, task2);
+            console.log(task1, task2);
         }
 
         //to stop redirecting bug
         e.preventDefault();
         const taskId = e.dataTransfer.getData('text/plain');
+        console.log(taskId);
 
         // const draggedTask = document.querySelector(`data-task_id[${taskId}]`);
         const tasks = document.querySelectorAll("#task");
