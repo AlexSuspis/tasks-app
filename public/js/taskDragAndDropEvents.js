@@ -1,25 +1,8 @@
-// findAncestorElementWithId = (startElement, targetId) => {
-
-//     let ancestor = startElement.parentElement;
-//     do {
-//         if (ancestor.getAttribute("id") === targetId) {
-//             return ancestor;
-//         }
-//     } while ((ancestor = ancestor.parentElement) !== null);
-
-//     return null;
-// }
-// swapTaskPositions = (task1, task2) => {
-//     console.log("swap task positions event");
-//     // console.log(task1, task2);
-// }
 const dragAndDropEvents = {
     dragStart: (e) => {
-        console.log('drag start');
         const task = findAncestorElementWithId(e.target, "task");
         const taskId = task.getAttribute('data-task_id');
         e.dataTransfer.setData("text/plain", taskId);
-        console.log(taskId);
     },
     dragEnter: (e) => {
         //preventDefault() so we make the div a valid drop target
@@ -38,10 +21,9 @@ const dragAndDropEvents = {
 
         //to stop redirecting bug
         e.preventDefault();
-        const taskId = e.dataTransfer.getData('text/plain');
-        console.log(taskId);
 
-        // const draggedTask = document.querySelector(`data-task_id[${taskId}]`);
+        const taskId = e.dataTransfer.getData('text/plain');
+
         const tasks = document.querySelectorAll("#task");
         let draggedTask;
         for (let task of tasks) {
@@ -73,18 +55,3 @@ wireDragAndDropEvents = (taskContainer) => {
     wireDragStartEvent(taskContainer);
     wireContainerEvents(taskContainer);
 }
-
-// const dragHandles = document.querySelectorAll('.myDragHandle');
-// dragHandles.forEach(handle => wireDragStartEvent(handle));
-
-//wire dragand drop events
-    //wire container events (drop)
-    //and drag start event (currently on handles)
-
-
-// const taskContainers = document.querySelectorAll("#taskContainer");
-// taskContainers.forEach(container => {
-//     wireContainerEvents(container)
-//     wireCRUDEvents(container)
-// });
-
