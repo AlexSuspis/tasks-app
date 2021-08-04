@@ -1,33 +1,15 @@
-wireCRUDEvents = (task) => {
-    toggleElementVisibility = (el) => {
-        if (el.style.display === 'inline') {
-            el.style.display = 'none';
-        } else {
-            el.style.display = 'inline';
-        }
-    }
-    taskOptionsToggled = (e) => {
+const events = {
+    taskOptionsToggled: (e) => {
         const overlayMenu = e.target.nextElementSibling;
         toggleElementVisibility(overlayMenu);
-    }
-    taskTextChangedEvent = (e) => {
+    },
+    taskTextChangedEvent: (e) => {
         alert('task text changed');
-    }
-    taskCompleted = (e) => {
+    },
+    taskCompleted: (e) => {
         alert('task completed event!');
-    }
-    taskDeleted = (e) => {
-        findAncestorElementWithId = (startElement, targetId) => {
-
-            let ancestor = startElement.parentElement;
-            do {
-                if (ancestor.getAttribute("id") === targetId) {
-                    return ancestor;
-                }
-            } while ((ancestor = ancestor.parentElement) !== null);
-
-            return null;
-        }
+    },
+    taskDeleted: (e) => {
 
         //remove from database
 
@@ -45,21 +27,24 @@ wireCRUDEvents = (task) => {
         //remove from DOM
         taskContainer.remove();
     }
+}
+wireCRUDEvents = (taskContainer) => {
+    const task = taskContainer.querySelector("#task");
 
-    task.querySelector("#optionsIcon").addEventListener('click', taskOptionsToggled);
-    task.querySelector("#taskButton").addEventListener('click', taskCompleted);
-    task.querySelector("#taskTextInput").addEventListener('change', taskTextChangedEvent);
-    task.querySelector("#deleteTaskIcon").addEventListener('click', taskDeleted);
+    task.querySelector("#optionsIcon").addEventListener('click', events.taskOptionsToggled);
+    task.querySelector("#taskButton").addEventListener('click', events.taskCompleted);
+    task.querySelector("#taskTextInput").addEventListener('change', events.taskTextChangedEvent);
+    task.querySelector("#deleteTaskIcon").addEventListener('click', events.taskDeleted);
 
     //paused for the time being because it breaks. it created a new task with no text.
     // task.querySelector("#newTaskIcon").addEventListener('click', createNewTask);
 }
 
-//EVENT: Task is created
+//EVENT Task is created
 const textInputForNewTask = document.querySelector('#newTaskDiv input');
-createNewTask = (e) => {
+newTaskCreated = (e) => {
     if (e.target !== "") {
-        createTask = (taskId, text) => {
+        createTaskContainer = (taskId, text) => {
             //if first task, there are no other tasks to clone!
             const anyTaskContainer = document.querySelector("#taskContainer");
             const newTaskContainer = anyTaskContainer.cloneNode(true);
@@ -82,9 +67,10 @@ createNewTask = (e) => {
             .then((res) => {
                 const taskId = res.data
 
-                const newTask = createTask(taskId, text);
+                const newTask = createTaskContainer(taskId, text);
 
                 wireCRUDEvents(newTask);
+                //need to wire drag and drop events too!
 
                 document.querySelector("#container").append(newTask);
 
@@ -97,9 +83,9 @@ createNewTask = (e) => {
             });
     }
 }
-textInputForNewTask.addEventListener('change', createNewTask);
+textInputForNewTask.addEventListener('change', newTaskCreated);
 
-const tasks = document.querySelectorAll("#task");
-tasks.forEach(task => wireCRUDEvents(task));
 
+// const taskContainers = document.querySelectorAll("#taskContainer");
+// taskContainers.forEach(taskContainer => wireCRUDEvents(taskContainer));
 
