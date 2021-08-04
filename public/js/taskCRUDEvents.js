@@ -31,8 +31,8 @@ wireCRUDEvents = (task) => {
 
         //remove from database
 
-        const taskDiv = findAncestorElementWithId(e.target, "task");
-        const taskId = taskDiv.getAttribute("data-task_id");
+        const taskContainer = findAncestorElementWithId(e.target, "taskContainer");
+        const taskId = taskContainer.querySelector("#task").getAttribute("data-task_id");
 
         axios.delete(`/task/${taskId}`)
             .then(() => {
@@ -43,7 +43,7 @@ wireCRUDEvents = (task) => {
             })
 
         //remove from DOM
-        taskDiv.remove();
+        taskContainer.remove();
     }
 
     task.querySelector("#optionsIcon").addEventListener('click', taskOptionsToggled);
