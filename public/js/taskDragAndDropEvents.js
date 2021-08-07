@@ -55,48 +55,6 @@ const dragAndDropEvents = {
                 console.log("below!");
                 container.insertBefore(draggedTaskContainer, container.children[droppedOnTaskPosition]);
             }
-
-            // const tasksArray = Array.from(container.children);
-
-            // //determine bounds for array slice
-            // let lowerBound = 0;
-            // let upperBound = 0;
-            // if (isDownShift) {
-            //     console.log("it's a down shift")
-            //     lowerBound = droppedOnTaskPosition;
-            //     upperBound = draggedTaskPosition;
-            //     if (!wasDroppedInTopHalfOfContainer) {
-            //         //we include droppedOnTaskPosition in slice
-            //         console.log("exclude droppedOnTask from shift")
-            //         lowerBound++;
-            //     }
-
-            //     for (let i = upperBound - 2; i > lowerBound - 2; i--) {     //upperBound - 1 as we do not include draggedTask in iteration
-            //         tasksArray[i].style.backgroundColor = 'red'
-            //         console.log(`new index of dragged task is ${lowerBound - 1}`)
-
-            //         const currentTask = tasksArray[i];
-
-            //         currentTask.setAttribute("data-position", i + 2);
-
-            //         tasksArray[i + 2] = currentTask;
-            //     }
-
-            // } else if (!isDownShift) {
-            //     console.log("it's an up shift")
-            //     lowerBound = draggedTaskPosition;
-            //     upperBound = droppedOnTaskPosition;
-            //     if (wasDroppedInTopHalfOfContainer) {
-            //         //we include droppedOnTaskPosition in slice
-            //         console.log("exclude droppedOnTask in shift")
-            //         upperBound--;
-            //     }
-            // }
-            // console.log(`taskDraggedByUserPos is ${draggedTaskPosition} and droppedOnTaskPosition is ${droppedOnTaskPosition}`);
-            // console.log(`lower bound is ${lowerBound} and upperBound is ${upperBound}`);
-
-            // //up shift: add 1 to all tasks between lower and upper bound
-            // //down shift: subtract 1
         }
 
         //to stop redirecting bug
