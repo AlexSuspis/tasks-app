@@ -1,4 +1,7 @@
 findAncestorElementWithId = (startElement, targetId) => {
+    if (startElement.getAttribute("id") === targetId) {
+        return startElement;
+    }
 
     let ancestor = startElement.parentElement;
     do {

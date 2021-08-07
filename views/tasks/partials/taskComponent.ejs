@@ -1,5 +1,5 @@
 <div id="taskContainer">
-    <div id="task" data-task_id="<%=task._id%>" draggable="true">
+    <div id="task" data-task_id="<%=task._id%>" data-position="<%=task.position%>">
         <button id="taskButton">task</button>
         <input type="text" id="taskTextInput" value="<%= task.text %>">
         <span id="optionsContainer">

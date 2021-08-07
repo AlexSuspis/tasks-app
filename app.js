@@ -24,8 +24,9 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 // GET all tasks
 app.get('/tasks', async (req, res) => {
     const tasks = await Task.find({});
-    console.log(tasks);
+
     //order tasks based on their position
+    // console.log(tasks)
 
     res.render('tasks/index', { tasks })
 })
@@ -59,7 +60,7 @@ app.patch('/task/:id/label', (req, res) => {
 
 })
 
-app.patch('/task/:id/position', (req, res) => {
+app.patch('/task/:id/reorder', (req, res) => {
     //for when only a reodering occurs. No promotion or demotion of tasks.
     //A task stays a task and a subtask stays a subtask.
 
@@ -67,7 +68,7 @@ app.patch('/task/:id/position', (req, res) => {
     //fetch task by id
     //update position property
     //we take old position, new position, and we must adjust every other position for 
-    //affected tasks.
+    //affected tasks. Basically perform a shift operation
     //save task
 
     const { newPosition } = req.body;
@@ -103,6 +104,8 @@ app.delete('/task/:id', async (req, res) => {
     const { id } = req.params;
 
     const data = await Task.findOneAndDelete({ _id: id });
+
+    //we must update all preceding task's positions. This can be done on the client side.
 
     res.send(data);
 })
