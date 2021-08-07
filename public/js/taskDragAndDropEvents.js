@@ -56,14 +56,6 @@ const dragAndDropEvents = {
                 container.insertBefore(draggedTaskContainer, container.children[droppedOnTaskPosition]);
             }
 
-
-            //if "above" and it's a down shift, we include the task that was dropped on in the slice. (is it the upper or lower bound?)
-            //if "above" and it's an up shift, we don't include it.
-
-            //if "below" and it's an up shift, we include it
-            //if "below" and it's a down shift, we exclude it
-
-
             // const tasksArray = Array.from(container.children);
 
             // //determine bounds for array slice
@@ -88,7 +80,6 @@ const dragAndDropEvents = {
             //         currentTask.setAttribute("data-position", i + 2);
 
             //         tasksArray[i + 2] = currentTask;
-
             //     }
 
             // } else if (!isDownShift) {
@@ -106,26 +97,6 @@ const dragAndDropEvents = {
 
             // //up shift: add 1 to all tasks between lower and upper bound
             // //down shift: subtract 1
-
-
-
-            if (isDownShift) {
-            } else {
-
-            }
-
-            // //SHIFT
-
-
-
-
-            //shift positions of all tasks between task1 and task 2
-            //Decide direction of shift (up or down)
-            //decide on what part of task2 task1 landed.
-            //get all tasks between task1 and task2, and update their positions
-            //if(task1.pos > task2.pos) it's a down shift for all tasks in between
-            //task 1 and task 2
-            //else it's an up shift
         }
 
         //to stop redirecting bug
