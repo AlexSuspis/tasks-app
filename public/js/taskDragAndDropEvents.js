@@ -42,12 +42,19 @@ const dragAndDropEvents = {
                 isDownShift = true;
             }
 
-            let wasDroppedInTopHalfOfContainer = false;
+            const container = document.querySelector("#container");
+            //convert into array so we can apply the filter method
+            const draggedTaskContainer = findAncestorElementWithId(taskDraggedByUser, "taskContainer");
+
             if (dropEventYCoordinate < middleYCoordinate) {
                 console.log("above!")
-                wasDroppedInTopHalfOfContainer = true
+                //shift droppedOnTask
+                container.insertBefore(draggedTaskContainer, container.children[droppedOnTaskPosition - 1]);
+            } else {
+                //do not shift droppedOnTask
+                console.log("below!");
+                container.insertBefore(draggedTaskContainer, container.children[droppedOnTaskPosition]);
             }
-            else console.log("below!");
 
 
             //if "above" and it's a down shift, we include the task that was dropped on in the slice. (is it the upper or lower bound?)
@@ -57,43 +64,55 @@ const dragAndDropEvents = {
             //if "below" and it's a down shift, we exclude it
 
 
-            //determine bounds for array slice
-            let lowerBound = 0;
-            let upperBound = 0;
-            if (isDownShift) {
-                console.log("it's a down shift")
-                lowerBound = droppedOnTaskPosition;
-                upperBound = draggedTaskPosition;
-                if (wasDroppedInTopHalfOfContainer) {
-                    //we include droppedOnTaskPosition in slice
-                    console.log("include droppedOnTask in shift")
-                }
-            } else if (!isDownShift) {
-                console.log("it's an up shift")
-                if (!wasDroppedInTopHalfOfContainer) {
-                    //we include droppedOnTaskPosition in slice
-                    console.log("include droppedOnTask in shift")
-                }
-                lowerBound = draggedTaskPosition;
-                upperBound = droppedOnTaskPosition;
-            }
-            // // console.log(`taskDraggedByUserPos is ${draggedTaskPosition} and droppedOnTaskPosition is ${droppedOnTaskPosition}`);
-            // // console.log(`lower bound is ${lowerBound} and upperBound is ${upperBound}`);
+            // const tasksArray = Array.from(container.children);
 
+            // //determine bounds for array slice
+            // let lowerBound = 0;
+            // let upperBound = 0;
+            // if (isDownShift) {
+            //     console.log("it's a down shift")
+            //     lowerBound = droppedOnTaskPosition;
+            //     upperBound = draggedTaskPosition;
+            //     if (!wasDroppedInTopHalfOfContainer) {
+            //         //we include droppedOnTaskPosition in slice
+            //         console.log("exclude droppedOnTask from shift")
+            //         lowerBound++;
+            //     }
 
-            // //decide if it is an up or down shift
-            // //if lowerBound === draggedTaskPos, it's an up shift
-            // //else if upperBound === draggedTaskPos, it's a down shift
+            //     for (let i = upperBound - 2; i > lowerBound - 2; i--) {     //upperBound - 1 as we do not include draggedTask in iteration
+            //         tasksArray[i].style.backgroundColor = 'red'
+            //         console.log(`new index of dragged task is ${lowerBound - 1}`)
+
+            //         const currentTask = tasksArray[i];
+
+            //         currentTask.setAttribute("data-position", i + 2);
+
+            //         tasksArray[i + 2] = currentTask;
+
+            //     }
+
+            // } else if (!isDownShift) {
+            //     console.log("it's an up shift")
+            //     lowerBound = draggedTaskPosition;
+            //     upperBound = droppedOnTaskPosition;
+            //     if (wasDroppedInTopHalfOfContainer) {
+            //         //we include droppedOnTaskPosition in slice
+            //         console.log("exclude droppedOnTask in shift")
+            //         upperBound--;
+            //     }
+            // }
+            // console.log(`taskDraggedByUserPos is ${draggedTaskPosition} and droppedOnTaskPosition is ${droppedOnTaskPosition}`);
+            // console.log(`lower bound is ${lowerBound} and upperBound is ${upperBound}`);
 
             // //up shift: add 1 to all tasks between lower and upper bound
             // //down shift: subtract 1
-            // //decide if we include droppedOnTaskPosition in upper/lower bound
 
 
-            // const tasks = document.querySelectorAll("#task");
-            // const container = document.querySelector("#container");
-            // //convert into array so we can apply the filter method
-            // const tasksArray = Array.from(container.children);
+
+            if (isDownShift) {
+            } else {
+
+            }
 
             // //SHIFT
 
