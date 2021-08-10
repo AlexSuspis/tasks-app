@@ -19,10 +19,10 @@ const CRUDevents = {
     },
     taskDeleted: (e) => {
 
-        //remove from database
         const taskContainer = findAncestorElementWithId(e.target, "taskContainer");
         const taskId = taskContainer.querySelector("#task").getAttribute("data-task_id");
 
+        //remove from database
         axios.delete(`/task/${taskId}`)
             .then(() => {
                 console.log(`Removed task with id '${taskId}' from database\n`);

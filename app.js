@@ -48,10 +48,8 @@ app.post('/task', async (req, res) => {
 });
 
 app.patch('/task/:id/text', async (req, res) => {
-
     let { id } = req.params;
     const { newText } = req.body;
-    console.log("new text: ", newText);
 
     const task = await Task.findByIdAndUpdate(id, { text: newText });
     await task.save();
@@ -69,20 +67,13 @@ app.patch('/task/:id/position', async (req, res) => {
     //for when only a reodering occurs. No promotion or demotion of tasks.
     //A task stays a task and a subtask stays a subtask.
 
-    //take new position from req.body
-    //fetch task by id
-    //update position property
-    //we take old position, new position, and we must adjust every other position for 
-    //affected tasks. Basically perform a shift operation
-    //save task
     const { id } = req.params;
-    const t = await Task.findById(id);
     const { newPosition } = req.body;
+    const t = await Task.findById(id);
 
     t.position = newPosition;
     await t.save();
     res.send(t);
-    // console.log(`New position is ${newPosition}`);
 })
 
 app.patch('/task/:id/promote', (req, res) => {
