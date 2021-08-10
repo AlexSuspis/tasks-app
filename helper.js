@@ -1,9 +1,9 @@
-quickSort = (arr) => {
+function quickSortTasks(arr) {
     if (arr.length == 1 || arr.length == 0) {
         return arr;
     }
     else if (arr.length == 2) {
-        if (arr[0] <= arr[1]) return arr;
+        if (arr[0].position <= arr[1].position) return arr;
         else {
             let sortedArr = [arr[1], arr[0]];
             return sortedArr;
@@ -12,20 +12,20 @@ quickSort = (arr) => {
 
     randomIndex = Math.floor(Math.random() * arr.length);
 
-    const pivot = arr[randomIndex];
+    const pivot = arr[randomIndex].position;
 
     let L = [];
     let R = [];
     let X = [];
 
-    arr.forEach(num => {
-        if (num < pivot) L.push(num);
-        else if (num > pivot) R.push(num);
-        else if (num == pivot) X.push(num);
-    })
+    arr.forEach(task => {
+        if (task.position < pivot) L.push(task);
+        else if (task.position > pivot) R.push(task);
+        else if (task.position == pivot) X.push(task);
+    });
 
-    let sortedL = quickSort(L);
-    let sortedR = quickSort(R);
+    let sortedL = quickSortTasks(L);
+    let sortedR = quickSortTasks(R);
 
     let sortedArr = sortedL.concat(X, sortedR);
 
@@ -35,4 +35,4 @@ quickSort = (arr) => {
 // console.log(quickSort([5, 4, 3, 2, 1, 7, -1, -5, 15, 3]));
 
 
-module.exports.quickSort;
+module.exports = quickSortTasks;

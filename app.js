@@ -5,6 +5,7 @@ const { v4: uuid } = require('uuid');
 const bodyParser = require('body-parser');
 // const { tasks } = require('./seeds/mock_data');
 const mongoose = require('mongoose');
+const quickSortTasks = require('./helper.js');
 
 const Task = require('./models/task');
 
@@ -23,10 +24,12 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // GET all tasks
 app.get('/tasks', async (req, res) => {
-    const tasks = await Task.find({});
+    const unorderedTasks = await Task.find({});
 
     //order tasks based on their position
-    // console.log(tasks)
+    // console.log(tasks);
+    const tasks = quickSortTasks(unorderedTasks);
+    console.log(tasks);
 
     res.render('tasks/index', { tasks })
 })
