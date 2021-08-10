@@ -29,7 +29,7 @@ app.get('/tasks', async (req, res) => {
     //order tasks based on their position
     // console.log(tasks);
     const tasks = quickSortTasks(unorderedTasks);
-    console.log(tasks);
+    // console.log(taks);
 
     res.render('tasks/index', { tasks })
 })
@@ -80,7 +80,7 @@ app.patch('/task/:id/position', async (req, res) => {
     t.position = newPosition;
     await t.save();
     res.send(t);
-    console.log(`New position is ${newPosition}`);
+    // console.log(`New position is ${newPosition}`);
 })
 
 app.patch('/task/:id/promote', (req, res) => {
