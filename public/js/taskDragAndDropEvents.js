@@ -53,7 +53,7 @@ const dragAndDropEvents = {
                 task.setAttribute("data-position", newPosition);
                 axios.patch(`/task/${task.getAttribute("data-task_id")}/position`, { newPosition })
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                     })
                     .catch(err => {
                         console.log(err);

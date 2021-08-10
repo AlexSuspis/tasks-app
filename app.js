@@ -51,8 +51,10 @@ app.patch('/task/:id/text', async (req, res) => {
 
     let { id } = req.params;
     const { newText } = req.body;
+    console.log("new text: ", newText);
 
-    const task = Task.findById({ id });
+    const task = await Task.findByIdAndUpdate(id, { text: newText });
+    await task.save();
 })
 app.patch('/task/:id/colour', (req, res) => {
     console.log('task colour change patch route');
@@ -84,13 +86,12 @@ app.patch('/task/:id/position', async (req, res) => {
 })
 
 app.patch('/task/:id/promote', (req, res) => {
+    //we take a subtask and make it a main task
+    //task 1 is the subtask being promoted
     //take id of task 1 from req.params, and id from task 2 from req.body
-    //task 1 is being promoted
     //we remove task 2's id from task 1's parentTask property 
     //we remove task 1's id from task 2's subtask array
-    //we update task 1's position which is in req.body
-    //we take old position, new position, and we must adjust every other position for 
-    //affected tasks.
+    //we set task 1's position from newPosition in req.body (it is now placed in array of main tasks)
     //we save both tasks 
     const { newPosition } = req.body;
     console.log(`PROMOTE: New position is ${newPosition}`);

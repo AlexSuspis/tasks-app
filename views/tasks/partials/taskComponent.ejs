@@ -7,6 +7,8 @@
             <%- include ("taskOptionsOverlay.ejs") %>
         </span>
         <div class="myDragHandle" draggable="true"></div>
+    </div>
+    <div id="subtaskContainer">
         <%for(subtask of task.subtasks){%>
             <div id="subtask">
                 <button id="subtaskButton">subtask</button>

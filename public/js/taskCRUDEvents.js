@@ -4,7 +4,15 @@ const CRUDevents = {
         toggleElementVisibility(overlayMenu);
     },
     taskTextChangedEvent: (e) => {
-        alert('task text changed');
+        const taskContainer = findAncestorElementWithId(e.target, "taskContainer");
+        const task = taskContainer.querySelector("#task");
+
+        const taskId = task.getAttribute("data-task_id");
+        const newText = e.target.value;
+
+        axios.patch(`/task/${taskId}/text`, { newText })
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
     },
     taskCompleted: (e) => {
         alert('task completed event!');
