@@ -60,7 +60,7 @@ app.patch('/task/:id/label', (req, res) => {
 
 })
 
-app.patch('/task/:id/reorder', (req, res) => {
+app.patch('/task/:id/position', async (req, res) => {
     //for when only a reodering occurs. No promotion or demotion of tasks.
     //A task stays a task and a subtask stays a subtask.
 
@@ -70,8 +70,13 @@ app.patch('/task/:id/reorder', (req, res) => {
     //we take old position, new position, and we must adjust every other position for 
     //affected tasks. Basically perform a shift operation
     //save task
-
+    const { id } = req.params;
+    const t = await Task.findById(id);
     const { newPosition } = req.body;
+
+    t.position = newPosition;
+    await t.save();
+    res.send(t);
     console.log(`New position is ${newPosition}`);
 })
 
