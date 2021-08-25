@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const mongoose = require('mongoose');
 const quickSortTasks = require('./helper.js');
 
+const mongoose = require('mongoose');
 const Task = require('./models/task');
 
 app.set('view engine', 'ejs');
@@ -19,45 +19,36 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to database'))
     .catch((err) => console.log(err));
 
-// GET all tasks
+
 app.get('/tasks', async (req, res) => {
     const unorderedTasks = await Task.find({});
-
-    //order tasks based on their position
-    // console.log(tasks);
     const tasks = quickSortTasks(unorderedTasks);
-    // console.log(taks);
-
     res.render('tasks/index', { tasks })
 })
 
 app.post('/task', async (req, res) => {
     const { text, position } = req.body;
-
     const t = new Task({
         text,
         position
     });
-
     t.save();
-
     res.send(t._id);
 });
 
 app.patch('/task/:id/text', async (req, res) => {
     let { id } = req.params;
     const { newText } = req.body;
-
     const task = await Task.findByIdAndUpdate(id, { text: newText });
     await task.save();
 })
+
 app.patch('/task/:id/colour', (req, res) => {
     console.log('task colour change patch route');
-
 })
+
 app.patch('/task/:id/label', (req, res) => {
     console.log('task label change patch route');
-
 })
 
 app.patch('/task/:id/position', async (req, res) => {
@@ -83,8 +74,8 @@ app.patch('/task/:id/promote', (req, res) => {
     //we save both tasks 
     const { newPosition } = req.body;
     console.log(`PROMOTE: New position is ${newPosition}`);
-
 })
+
 app.patch('/task/:id/demote', (req, res) => {
     //take a given task 1, and make it a subtask of another task 2
     //take id of task one from params, and id of task 2 from req.body
@@ -99,32 +90,8 @@ app.patch('/task/:id/demote', (req, res) => {
 // DELETE a task
 app.delete('/task/:id', async (req, res) => {
     const { id } = req.params;
-
     const data = await Task.findOneAndDelete({ _id: id });
-
-    //we must update all preceding task's positions. This can be done on the client side.
-
     res.send(data);
 })
 
 module.exports = app;
-
-
-//PATCH endpoint for changing the following task properties: subtasks array, colour, labels array, inner text
-// app.patch('/tasks/:id', (req, res) => {
-//     let { id } = req.params;
-//     let [newProperty, newValue] = Object.entries(req.body)[0];
-
-//     //find task with unique id
-//     let task = tasks.find(t => t.id === parseInt(id));
-
-//     //find task's property that's equal to key of req.body object, if any exists.
-//     //if found, replace its value with value from req.body object.
-//     for (let property in task) {
-//         if (newProperty == property) {
-//             task[property] = newValue;
-//         }
-//     }
-//     console.dir(tasks[0])
-//     res.send('patch req received!');
-// })
