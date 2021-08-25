@@ -1,9 +1,6 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const { v4: uuid } = require('uuid');
-const bodyParser = require('body-parser');
-// const { tasks } = require('./seeds/mock_data');
 const mongoose = require('mongoose');
 const quickSortTasks = require('./helper.js');
 
@@ -110,14 +107,7 @@ app.delete('/task/:id', async (req, res) => {
     res.send(data);
 })
 
-const port = 3000;
-app.listen(port, () => {
-    console.log("Listening on port " + port + "; press ctrl-c to exit")
-})
-
-
-
-
+module.exports = app;
 
 
 //PATCH endpoint for changing the following task properties: subtasks array, colour, labels array, inner text
