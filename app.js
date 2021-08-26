@@ -9,14 +9,15 @@ const Task = require('./models/task');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+require('dotenv').config();
 app.use(express.static('public'))
 app.use(express.static('images'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
-const dbUrl = 'mongodb://localhost:27017/tasks-app';
+const dbUrl = process.env.dbTESTURL;
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to database'))
+    .then(() => console.log('Connected to:\n\t', dbUrl))
     .catch((err) => console.log(err));
 
 
