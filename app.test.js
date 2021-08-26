@@ -1,14 +1,31 @@
 const request = require('supertest');
 const app = require('./app.js');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-describe("Jest", () => {
-    it("makes Javascript testing awesome!", () => {
-        expect(true).toBeTruthy();
-    })
+beforeAll(async () => {
+
+    const testDBUrl = process.env.TESTDBURL;
+    await mongoose.connect(testDBUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+        .then(res => console.log("connected to test db"))
+        .catch(err => err);
+
+    // const collection = process.env.COLLECTION;
+    // await db.createCollection(collection);
+})
+
+afterAll(async () => {
+    // const collection = "test_" + process.env.COLLECTION;
+    // await db.dropCollection(collection);
+    // await db.dropDatabase();
+
+    await mongoose.disconnect();
 })
 
 describe("Database queries", () => {
-    it('should throw 404 if task ID in req.params is not found in database', () => { })
+    it('should throw 404 if task ID in req.params is not found in database', () => {
+
+    })
     it('should throw 404 if task ID in req.body is not found in database', () => { })
     it('should search database and find task1 and task2 by ID', () => { })
     it('should search database and find task1 and task2 by ID', () => { })
