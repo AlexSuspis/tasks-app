@@ -1,6 +1,12 @@
 const request = require('supertest');
 const app = require('./app.js');
 
+describe("Jest", () => {
+    it("makes Javascript testing awesome!", () => {
+        expect(true).toBeTruthy();
+    })
+})
+
 describe("Database queries", () => {
     it('should throw 404 if task ID in req.params is not found in database', () => { })
     it('should throw 404 if task ID in req.body is not found in database', () => { })
