@@ -1,41 +1,35 @@
 const request = require('supertest');
 const app = require('./app.js');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 require('dotenv').config();
+const db = require('./db/index');
 
-beforeAll(async () => {
+beforeAll(async () => { await db.connect() });
 
-    const testDBUrl = process.env.TESTDBURL;
-    await mongoose.connect(testDBUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-        .then(res => console.log("connected to test db"))
-        .catch(err => err);
+beforeEach(() => jest.useFakeTimers());
 
-    // const collection = process.env.COLLECTION;
-    // await db.createCollection(collection);
-})
+afterEach(() => { });
 
-afterAll(async () => {
-    // const collection = "test_" + process.env.COLLECTION;
-    // await db.dropCollection(collection);
-    // await db.dropDatabase();
-
-    await mongoose.disconnect();
-})
-
-describe("Database queries", () => {
-    it('should throw 404 if task ID in req.params is not found in database', () => {
-
-    })
-    it('should throw 404 if task ID in req.body is not found in database', () => { })
-    it('should search database and find task1 and task2 by ID', () => { })
-    it('should search database and find task1 and task2 by ID', () => { })
-})
+afterAll(async () => { await db.disconnect() });
 
 //a promotion means a subtask is promoted to a task
 describe("Promote a subtask to a task via PATCH /task/:id/promote", () => {
     //task1 is taskDraggedByUser and task2 is taskDroppedOnByUser
-    it('should update task1\'s parentTask ID attribute to be null', () => { })
-    it('should delete task1\'s ID from task1\'s parentTask subtask array', () => { })
-    it('should push task1\'s id to task2\`s subtasks array property', () => { })
-    it('should save task1 and task2 onto database', () => { })
+    // it('PATCH /task/1/promote --> task 1 with null parentTask field', () => {
+    //     request(app)
+    //         .patch('/task/1/promote')
+    //         .then(res => {
+    //             expect(res.body).toEqual(
+    //                 expect.arrayContaining([
+    //                     expect.objectContaining({
+
+    //                     })
+    //                 ])
+    //             )
+    //         })
+    // })
+    it('PATCH /task/1/promote --> remove task 1 ID from task 1\'s parent task subtasks array', () => { })
+    it('PATCH /task/1/promote --> task 2 subtasks array contains task 1 ID (check that before it didn\'t)', () => { })
+    it('PATCH /task/1/promote --> 200 status code if all went well', () => { })
+    it('PATCH /task/1/promote --> 404 status code if one or both tasks not found in database', () => { })
 })
