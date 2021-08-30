@@ -17,7 +17,10 @@ const taskSchema = new Schema({
             ref: 'Task'
         }
     ],
-    position: Number,
+    position: {
+        type: Number,
+        required: true
+    },
     labels: []
 })
 
