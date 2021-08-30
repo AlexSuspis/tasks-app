@@ -1,16 +1,81 @@
 const request = require('supertest');
 const app = require('./app.js');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 require('dotenv').config();
 const db = require('./db/index');
+const ObjectID = require('mongodb').ObjectID;
+const Task = require('./models/task');
+process.env.NODE_ENV = "test";
 
-beforeAll(async () => { await db.connect() });
+const seedDB = async () => {
+    const mock_tasks = [
+        {
+            // _id: ObjectID("111111111111"),
+            text: "task1",
+            colour: "red",
+            subtasks: [],
+            position: 1,
 
-beforeEach(() => jest.useFakeTimers());
+        },
+        {
+            // _id: ObjectID("222222222222"),
+            text: "task2",
+            colour: "yellow",
+            subtasks: [],
+            position: 2,
 
-afterEach(() => { });
+        }
+    ]
+    // for (let task in mock_tasks) {
+    //     console.log(task);
+    //     const t = new Task({ task });
+    //     await t.save();
+    // }
+    await Task.create(mock_tasks)
+    console.log("Database seeded with", mock_tasks, "\n");
+}
 
-afterAll(async () => { await db.disconnect() });
+beforeAll(async () => {
+    // await Task.deleteMany({})
+    //     .then(console.log("Task.deleteMany() finished"))
+    //     .catch(err => console.log(err))
+
+    await db.connect();
+
+    await db.clearDatabase();
+
+    // await seedDB();
+
+    await Task.createCollection().then(console.log("Task collection is created!"));
+});
+
+beforeEach(async () => {
+    // await Task.create(mock_tasks)
+    //     .then(console.log("inserted ", mock_tasks, "into database"))
+    //     .catch(err => console.log(err));
+    await seedDB();
+
+    // jest.useFakeTimers();
+
+    //create database and tasks collection
+    //create task1 and task2
+    //insert them into database
+});
+
+afterEach(async () => {
+    // await Task.deleteMany({})
+    //     .then(console.log("Task.deleteMany() finished"))
+    //     .catch(err => console.log(err))
+    await db.clearDatabase();
+});
+
+afterAll(async () => {
+    // await Task.deleteMany({})
+    //     .then(console.log("Task.deleteMany() finished"))
+    //     .catch(err => console.log(err))
+    await db.disconnect()
+});
+
 
 //a promotion means a subtask is promoted to a task
 describe("Promote a subtask to a task via PATCH /task/:id/promote", () => {

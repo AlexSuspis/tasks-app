@@ -12,6 +12,15 @@ module.exports.connect = async () => {
         .then(() => console.log('Connected to', dbName, 'database'));
 };
 
+module.exports.clearDatabase = async () => {
+    const collections = mongoose.connection.collections;
+    for (const key in collections) {
+        const collection = collections[key];
+        await collection.deleteMany();
+    };
+    console.log("cleared all collections from database");
+}
+
 module.exports.disconnect = async () => {
     await mongoose.connection.close()
         .then(res => console.log('Disconnected from', dbName))
