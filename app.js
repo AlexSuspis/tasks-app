@@ -6,10 +6,12 @@ const quickSortTasks = require('./helper.js');
 const Task = require('./models/task');
 const db = require('./db/index');
 
+require('dotenv').config();
+if (process.env.NODE_ENV != "test") db.connect();
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-require('dotenv').config();
 app.use(express.static('public'))
 app.use(express.static('images'))
 app.use(express.urlencoded({ extended: true }))

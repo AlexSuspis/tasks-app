@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-process.env.NODE_ENV = "test";
 const dbName = process.env.NODE_ENV === "test" ? "tasks-app-test" : "tasks-app";
 const dbUrl = `mongodb://localhost:27017/${dbName}`;
 
