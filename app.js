@@ -3,8 +3,8 @@ const app = express();
 const path = require('path');
 const quickSortTasks = require('./helper.js');
 
-const mongoose = require('mongoose');
 const Task = require('./models/task');
+const db = require('./db/index');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -14,12 +14,6 @@ app.use(express.static('public'))
 app.use(express.static('images'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
-
-const dbUrl = process.env.dbTESTURL;
-mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to:\n\t', dbUrl))
-    .catch((err) => console.log(err));
-
 
 app.get('/tasks', async (req, res) => {
     const unorderedTasks = await Task.find({});
@@ -73,8 +67,9 @@ app.patch('/task/:id/promote', (req, res) => {
     //we remove task 1's id from task 2's subtask array
     //we set task 1's position from newPosition in req.body (it is now placed in array of main tasks)
     //we save both tasks 
-    const { newPosition } = req.body;
-    console.log(`PROMOTE: New position is ${newPosition}`);
+
+    const task1 = Task.findById(req.params.id);
+    const task2 = Task.findById(req.body.id);
 })
 
 app.patch('/task/:id/demote', (req, res) => {
