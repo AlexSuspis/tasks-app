@@ -1,17 +1,11 @@
 const request = require('supertest');
 const app = require('./app.js');
-const mongoose = require('mongoose');
 require('dotenv').config();
-const db = require('./db/index');
+const db = require('./seeds/index');
 const ObjectID = require('mongodb').ObjectID;
 const Task = require('./models/task');
-const { mock_tasks } = require('./seeds/mock_data');
 process.env.NODE_ENV = "test";
 
-const seedDB = async () => {
-    await Task.create(mock_tasks);
-    console.log("Database seeded with", mock_tasks, "\n");
-}
 
 beforeAll(async () => {
     await db.connect();

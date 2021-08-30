@@ -4,9 +4,12 @@ const path = require('path');
 const quickSortTasks = require('./helper.js');
 
 const Task = require('./models/task');
-const db = require('./db/index');
+const db = require('./seeds/index');
 
 require('dotenv').config();
+
+//We only connect to the database if we are not in test mode. 
+//This is because we use the app.js file on both development and testing modes
 if (process.env.NODE_ENV != "test") db.connect();
 
 app.set('view engine', 'ejs');
