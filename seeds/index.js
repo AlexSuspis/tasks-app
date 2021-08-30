@@ -1,30 +1,37 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
-const Task = require('../models/task.js');
-const { tasks } = require('./mock_data');
+require('dotenv').config();
+const { mock_tasks } = require('./mock_data');
 
+const test_db_name = process.env.TEST_DB_NAME;
+const development_db_name = process.env.DEVELOPMENT_DB_NAME;
 
-const dbUrl = 'mongodb://localhost:27017/tasks-app';
-mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to database'))
-    .catch((err) => console.log(err));
+const dbName = process.env.NODE_ENV === "test" ? test_db_name : development_db_name;
+const dbUrl = `mongodb://localhost:27017/${dbName}`;
 
+const options = { useNewUrlParser: true, useUnifiedTopology: true }
+const db = mongoose.createConnection();
 
-seedDB = async () => {
+module.exports.connect = async () => {
+    await mongoose.connect(dbUrl, options)
+        .then(() => console.log('Connected to', dbName, 'database'));
+};
 
-    await Task.deleteMany({});
-
-    for (let task of tasks) {
-        const t = new Task({
-            text: task.text,
-            colour: task.colour,
-            // subtasks: task.subtasks,
-            // labels: task.labels
-        })
-
-        await t.save();
-    }
+module.exports.seedTasks = async () => {
+    await Task.create(mock_tasks);
+    console.log("Database seeded with", mock_tasks, "\n");
 }
 
-seedDB().then(() => mongoose.connection.close());
+module.exports.clearDatabase = async () => {
+    const collections = mongoose.connection.collections;
+    for (const key in collections) {
+        const collection = collections[key];
+        await collection.deleteMany();
+    };
+    console.log("cleared all collections from database");
+}
 
+module.exports.disconnect = async () => {
+    await mongoose.connection.close()
+        .then(res => console.log('Disconnected from', dbName))
+        .catch(err => console.log(err));
+};
