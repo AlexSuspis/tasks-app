@@ -1,17 +1,23 @@
-module.exports.tasks = [
+module.exports.mock_tasks = [
     {
-        text: 'Feed cat',
-        labels: [],
-        colour: 'red'
+        // _id: ObjectID("111111111111"),
+        text: "task1",
+        colour: "red",
+        subtasks: [],
+        position: 1,
     },
     {
-        text: 'Water plants',
-        labels: [],
-        colour: 'blue'
+        // _id: ObjectID("222222222222"),
+        text: "task2",
+        colour: "yellow",
+        subtasks: [],
+        position: 2,
     },
     {
-        text: 'this is a test',
-        labels: [],
-        colour: 'black'
+        // _id: ObjectID("222222222222"),
+        text: "task3",
+        colour: "brown",
+        subtasks: [],
+        position: 3,
     }
 ]
